@@ -279,9 +279,6 @@ export default function App() {
           />
           <ScrollRestoration nonce={nonce} />
           <Scripts nonce={nonce} />
-          <script src="/aos.js"></script>
-          <script src="/language-switcher.js"></script>
-          <script src="/custom.js"></script>
         </Analytics.Provider>
       </body>
     </html>
