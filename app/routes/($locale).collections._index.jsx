@@ -1,48 +1,21 @@
 import {useLoaderData, Link} from '@remix-run/react';
-import {defer} from '@shopify/remix-oxygen';
+import {json} from '@shopify/remix-oxygen';
 import {Pagination, getPaginationVariables, Image} from '@shopify/hydrogen';
-
+import '../styles/collection-list.css';
 /**
- * @param {LoaderFunctionArgs} args
- */
-export async function loader(args) {
-  // Start fetching non-critical data without blocking time to first byte
-  const deferredData = loadDeferredData(args);
-
-  // Await the critical data required to render initial state of the page
-  const criticalData = await loadCriticalData(args);
-
-  return defer({...deferredData, ...criticalData});
-}
-
-/**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
  * @param {LoaderFunctionArgs}
  */
-async function loadCriticalData({context, request}) {
+
+export async function loader({context, request}) {
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 4,
+    pageBy: 9,
   });
 
-  const [{collections}] = await Promise.all([
-    context.storefront.query(COLLECTIONS_QUERY, {
-      variables: paginationVariables,
-    }),
-    // Add other queries here, so that they are loaded in parallel
-  ]);
+  const {collections} = await context.storefront.query(COLLECTIONS_QUERY, {
+    variables: paginationVariables,
+  });
 
-  return {collections};
-}
-
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- * @param {LoaderFunctionArgs}
- */
-function loadDeferredData({context}) {
-  return {};
+  return json({collections});
 }
 
 export default function Collections() {
@@ -50,21 +23,25 @@ export default function Collections() {
   const {collections} = useLoaderData();
 
   return (
-    <div className="collections">
+    <div className="collections collection-list-page">
+      <div className="container">
       <h1>Collections</h1>
       <Pagination connection={collections}>
         {({nodes, isLoading, PreviousLink, NextLink}) => (
           <div>
-            <PreviousLink>
+            <PreviousLink className="yellow-btn bottom-spacing">
               {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
-            </PreviousLink>
+            </PreviousLink >
             <CollectionsGrid collections={nodes} />
-            <NextLink>
+            <div className="load-more">
+            <NextLink className="yellow-btn">
               {isLoading ? 'Loading...' : <span>Load more ↓</span>}
             </NextLink>
+            </div>
           </div>
         )}
       </Pagination>
+    </div>
     </div>
   );
 }
@@ -100,6 +77,7 @@ function CollectionItem({collection, index}) {
       to={`/collections/${collection.handle}`}
       prefetch="intent"
     >
+      <div className="col-block">
       {collection?.image && (
         <Image
           alt={collection.image.altText || collection.title}
@@ -108,6 +86,7 @@ function CollectionItem({collection, index}) {
           loading={index < 3 ? 'eager' : undefined}
         />
       )}
+      </div>
       <h5>{collection.title}</h5>
     </Link>
   );

@@ -1,55 +1,49 @@
-import {Suspense} from 'react';
+import {Suspense, useState, useRef, useEffect, useLayoutEffect} from 'react';
 import {defer, redirect} from '@shopify/remix-oxygen';
-import {Await, useLoaderData} from '@remix-run/react';
+import {Await, Link, useLoaderData} from '@remix-run/react';
+import {useNavigate} from 'react-router-dom';
 import {
+  Image,
+  Money,
+  VariantSelector,
   getSelectedProductOptions,
+  CartForm,
   Analytics,
-  useOptimisticVariant,
+  useAnalytics,
 } from '@shopify/hydrogen';
 import {getVariantUrl} from '~/lib/variants';
-import {ProductPrice} from '~/components/ProductPrice';
-import {ProductImage} from '~/components/ProductImage';
-import {ProductForm} from '~/components/ProductForm';
+import '../styles/product.css';
+import dhlLogo from '../assets/dhl.png';
+import certifiedBadge from '../assets/trustedlogo.png';
+import decorativegarland from '../assets/decorativegarland.png';
+import {Fancybox} from '@fancyapps/ui';
+import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
-/**
- * @type {MetaFunction<typeof loader>}
- */
 export const meta = ({data}) => {
-  return [{title: `Hydrogen | ${data?.product.title ?? ''}`}];
+  return [{title: `Curry Wolf | ${data?.product.title ?? ''}`}];
 };
 
-/**
- * @param {LoaderFunctionArgs} args
- */
-export async function loader(args) {
-  // Start fetching non-critical data without blocking time to first byte
-  const deferredData = loadDeferredData(args);
-
-  // Await the critical data required to render initial state of the page
-  const criticalData = await loadCriticalData(args);
-
-  return defer({...deferredData, ...criticalData});
-}
-
-/**
- * Load data necessary for rendering content above the fold. This is the critical data
- * needed to render the page. If it's unavailable, the whole page should 400 or 500 error.
- * @param {LoaderFunctionArgs}
- */
-async function loadCriticalData({context, params, request}) {
+export async function loader({params, request, context}) {
   const {handle} = params;
   const {storefront} = context;
+
+  const selectedOptions = getSelectedProductOptions(request).filter(
+    (option) =>
+      !option.name.startsWith('_sid') &&
+      !option.name.startsWith('_pos') &&
+      !option.name.startsWith('_psq') &&
+      !option.name.startsWith('_ss') &&
+      !option.name.startsWith('_v') &&
+      !option.name.startsWith('fbclid'),
+  );
 
   if (!handle) {
     throw new Error('Expected product handle to be defined');
   }
 
-  const [{product}] = await Promise.all([
-    storefront.query(PRODUCT_QUERY, {
-      variables: {handle, selectedOptions: getSelectedProductOptions(request)},
-    }),
-    // Add other queries here, so that they are loaded in parallel
-  ]);
+  const {product} = await storefront.query(PRODUCT_QUERY, {
+    variables: {handle, selectedOptions},
+  });
 
   if (!product?.id) {
     throw new Response(null, {status: 404});
@@ -65,118 +59,383 @@ async function loadCriticalData({context, params, request}) {
   if (firstVariantIsDefault) {
     product.selectedVariant = firstVariant;
   } else {
-    // if no selected variant was returned from the selected options,
-    // we redirect to the first variant's url with it's selected options applied
     if (!product.selectedVariant) {
       throw redirectToFirstVariant({product, request});
     }
   }
 
-  return {
+  const variants = storefront.query(VARIANTS_QUERY, {
+    variables: {handle},
+  });
+
+  return defer({
     product,
-  };
+    variants,
+  });
 }
 
-/**
- * Load data for rendering content below the fold. This data is deferred and will be
- * fetched after the initial page load. If it's unavailable, the page should still 200.
- * Make sure to not throw any errors here, as it will cause the page to 500.
- * @param {LoaderFunctionArgs}
- */
-function loadDeferredData({context, params}) {
-  // In order to show which variants are available in the UI, we need to query
-  // all of them. But there might be a *lot*, so instead separate the variants
-  // into it's own separate query that is deferred. So there's a brief moment
-  // where variant options might show as available when they're not, but after
-  // this deffered query resolves, the UI will update.
-  const variants = context.storefront
-    .query(VARIANTS_QUERY, {
-      variables: {handle: params.handle},
-    })
-    .catch((error) => {
-      // Log query errors, but don't throw them so the page can still render
-      console.error(error);
-      return null;
+function ProductMedia({media}) {
+  const [mainImage, setMainImage] = useState(
+    media.find((item) => item.__typename === 'MediaImage'),
+  );
+  const videoRef = useRef(null);
+
+  useLayoutEffect(() => {
+    Fancybox.bind('[data-fancybox="main-image"]', {
+      // FancyBox options
     });
 
-  return {
-    variants,
+    return () => {
+      Fancybox.destroy();
+    };
+  }, [mainImage]);
+
+  const handleImageClick = (event) => {
+    event.preventDefault();
   };
-}
 
-/**
- * @param {{
- *   product: ProductFragment;
- *   request: Request;
- * }}
- */
-function redirectToFirstVariant({product, request}) {
-  const url = new URL(request.url);
-  const firstVariant = product.variants.nodes[0];
+  if (!media || media.length === 0) {
+    return null; // Return early if media array is empty or undefined
+  }
 
-  return redirect(
-    getVariantUrl({
-      pathname: url.pathname,
-      handle: product.handle,
-      selectedOptions: firstVariant.selectedOptions,
-      searchParams: new URLSearchParams(url.search),
-    }),
-    {
-      status: 302,
-    },
+  const restImages = media.filter(
+    (item) => item.__typename === 'MediaImage' && item !== mainImage,
+  );
+
+  return (
+    <div
+      className="product-media"
+      data-aos="fade-up"
+      data-aos-duration="1500"
+      data-aos-once="true"
+    >
+      {mainImage && (
+        <div className="product-image" key={mainImage.id}>
+          <a
+            data-fancybox="main-image"
+            href={mainImage.image.url}
+            onClick={handleImageClick}
+          >
+            <Image
+              alt={mainImage.image.altText || 'Product Image'}
+              aspectRatio="1/1"
+              data={mainImage.image}
+              key={mainImage.image.id}
+              sizes="(min-width: 45em) 50vw, 100vw"
+            />
+          </a>
+        </div>
+      )}
+
+      {restImages.length > 0 && (
+        <div className="product-images-wrap">
+          {restImages.map((item) => (
+            <div
+              className="product-image"
+              key={item.id}
+              onClick={() => setMainImage(item)}
+            >
+              <Image
+                alt={item.image.altText || 'Product Image'}
+                aspectRatio="1/1"
+                data={item.image}
+                key={item.image.id}
+                sizes="(min-width: 45em) 50vw, 100vw"
+              />
+            </div>
+          ))}
+        </div>
+      )}
+
+      {media.map((item) => {
+        if (item.__typename === 'Video') {
+          const videoSource = item.sources.find(
+            (source) => source.mimeType === 'video/mp4',
+          );
+          return (
+            <div className="product-video" key={item.id}>
+              <video ref={videoRef} muted loop>
+                <source src={videoSource.url} type={videoSource.mimeType} />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+          );
+        }
+        return null;
+      })}
+    </div>
   );
 }
 
 export default function Product() {
-  /** @type {LoaderReturnData} */
   const {product, variants} = useLoaderData();
-  const selectedVariant = useOptimisticVariant(
-    product.selectedVariant,
-    variants,
+  const {selectedVariant} = product;
+
+  const getMetafieldText = (metafield) => {
+    if (!metafield) return '';
+
+    try {
+      const parsedValue = JSON.parse(metafield);
+      return parsedValue.children
+        ?.map((child) =>
+          child.children?.map((grandChild) => grandChild.value).join(' '),
+        )
+        .join(' ');
+    } catch (error) {
+      return '';
+    }
+  };
+
+  const preparationText = getMetafieldText(
+    product.metafields?.find(
+      (metafield) =>
+        metafield?.namespace === 'custom' && metafield?.key === 'preparation',
+    )?.value,
   );
 
-  const {title, descriptionHtml} = product;
+  const additionalInformationText = getMetafieldText(
+    product.metafields?.find(
+      (metafield) =>
+        metafield?.namespace === 'custom' &&
+        metafield?.key === 'additional_information',
+    )?.value,
+  );
+
+  const ingredientsText = getMetafieldText(
+    product.metafields?.find(
+      (metafield) =>
+        metafield?.namespace === 'custom' && metafield?.key === 'ingredients',
+    )?.value,
+  );
+
+  const nutritionalValuesText = getMetafieldText(
+    product.metafields?.find(
+      (metafield) =>
+        metafield?.namespace === 'custom' &&
+        metafield?.key === 'nutritional_values',
+    )?.value,
+  );
+
+  const navigate = useNavigate();
+
+  const renderProductTitle = (title) => {
+    const regex = /(.*?)(\((.*?)\))/;
+    const match = title.match(regex);
+    if (match) {
+      return (
+        <>
+          {match[1]}
+          <br />
+          <span>{match[2]}</span>
+        </>
+      );
+    }
+    return title;
+  };
 
   return (
-    <div className="product">
-      <ProductImage image={selectedVariant?.image} />
-      <div className="product-main">
-        <h1>{title}</h1>
-        <ProductPrice
-          price={selectedVariant?.price}
-          compareAtPrice={selectedVariant?.compareAtPrice}
-        />
-        <br />
-        <Suspense
-          fallback={
-            <ProductForm
-              product={product}
-              selectedVariant={selectedVariant}
-              variants={[]}
-            />
-          }
-        >
-          <Await
-            errorElement="There was a problem loading product variants"
-            resolve={variants}
+    <div className="main-product-sec">
+      <div className="food-decorative-garland">
+        <img src={decorativegarland} alt="food-decorative-garland" />
+      </div>
+      <div className="container">
+        <div className="go-back-pro-btn">
+          <a
+            href="javascript:;"
+            className="yellow-border-btn"
+            onClick={() => navigate(-1)}
           >
-            {(data) => (
-              <ProductForm
-                product={product}
-                selectedVariant={selectedVariant}
-                variants={data?.product?.variants.nodes || []}
-              />
-            )}
-          </Await>
-        </Suspense>
-        <br />
-        <br />
-        <p>
-          <strong>Description</strong>
-        </p>
-        <br />
-        <div dangerouslySetInnerHTML={{__html: descriptionHtml}} />
-        <br />
+            Zurück zu allen Produkten
+          </a>
+        </div>
+        <div className="product-container">
+          <div className="left-content">
+            <div className="product-title mobile-hide">
+              <h1
+                data-aos="fade-up"
+                data-aos-duration="1500"
+                data-aos-once="true"
+              >
+                {renderProductTitle(product.title)}
+              </h1>
+            </div>
+            <div className="left-bottom-content">
+              <div className="left-inner-c">
+                {preparationText && (
+                  <div
+                    className="info-box"
+                    data-aos="fade-up"
+                    data-aos-duration="1500"
+                    data-aos-once="true"
+                  >
+                    <h2>Zubereitung</h2>
+                    <p>{preparationText}</p>
+                  </div>
+                )}
+
+                {nutritionalValuesText && (
+                  <div
+                    className="info-box"
+                    data-aos="fade-up"
+                    data-aos-duration="1500"
+                    data-aos-once="true"
+                  >
+                    <h2>Nährwerte</h2>
+                    <p>{nutritionalValuesText}</p>
+                  </div>
+                )}
+              </div>
+              <div
+                className="smile-block"
+                data-aos="fade-up"
+                data-aos-duration="1500"
+                data-aos-once="true"
+              >
+                <div className="special-block">
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/icon_bestseller.svg?v=1721633600"
+                    alt="face smile icon"
+                  />
+                  <h4>Besondere Auswahl</h4>
+                  <p>Familienmanufaktur mit eigener Rezeptur</p>
+                </div>
+                <div className="special-block">
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/icon_expressdelivery.svg?v=1721633600"
+                    alt="quick delivery icon"
+                  />
+                  <h4>Schnelle Lieferung</h4>
+                  <p>Wir liefern innerhalb von 2-4 Tagen*</p>
+                </div>
+                <div className="special-block">
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/icon_highquality.svg?v=1721633600"
+                    alt="secure pay icon"
+                  />
+                  <h4>Sichere Bezahlung</h4>
+                  <p>Sicher bezahlen per Paypal und Sofort.com</p>
+                </div>
+                <div className="special-block">
+                  <img
+                    src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/icon_worldwideshipping.svg?v=1721633600"
+                    alt="earth icon"
+                  />
+                  <h4>CO₂ neutraler Versand</h4>
+                  <p>Der Versand erfolgt mit DHL GoGreen</p>
+                </div>
+              </div>
+              <div
+                className="right-bottom-content desktop-hide"
+                data-aos="fade-up"
+                data-aos-duration="1500"
+                data-aos-once="true"
+              >
+                <div className="cerified-box">
+                  <h4>Zertifizierter Online-shop</h4>
+                  <img
+                    className="certified-logo"
+                    src={certifiedBadge}
+                    alt="certified logo"
+                  />
+                </div>
+                <div className="certified-logo">
+                  <h4>Schneller Versand</h4>
+                  <img className="dhl-logo" src={dhlLogo} alt="dhl logo" />
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="center-content">
+            {product.media && <ProductMedia media={product.media.nodes} />}
+          </div>
+          <div className="right-content">
+            <div className="product-title desktop-hide">
+              <h1
+                data-aos="fade-up"
+                data-aos-duration="1500"
+                className="aos-init aos-animate"
+                data-aos-once="true"
+              >
+                {renderProductTitle(product.title)}
+              </h1>
+            </div>
+            <div className="product-content">
+              <div
+                data-aos="fade-up"
+                data-aos-duration="1500"
+                data-aos-once="true"
+              >
+                <ProductPrice selectedVariant={selectedVariant} />
+                <div
+                  dangerouslySetInnerHTML={{__html: product.descriptionHtml}}
+                />
+                <Suspense
+                  fallback={
+                    <ProductForm
+                      product={product}
+                      selectedVariant={selectedVariant}
+                      variants={[]}
+                    />
+                  }
+                >
+                  <Await
+                    errorElement="There was a problem loading product variants"
+                    resolve={variants}
+                  >
+                    {(data) => (
+                      <ProductForm
+                        product={product}
+                        selectedVariant={selectedVariant}
+                        variants={data.product?.variants.nodes || []}
+                      />
+                    )}
+                  </Await>
+                  {/* Display Metafield */}
+                  <div
+                    className="metafield"
+                    data-aos="fade-up"
+                    data-aos-duration="1500"
+                    data-aos-once="true"
+                  >
+                    {ingredientsText && (
+                      <div className="ingridiant-box">
+                        <h2>Zutaten</h2>
+                        <p>{ingredientsText}</p>
+                      </div>
+                    )}
+
+                    {additionalInformationText && (
+                      <div className="ingridiant-box">
+                        <h2>Weitere Informationen</h2>
+                        <p>{additionalInformationText}</p>
+                      </div>
+                    )}
+                  </div>
+                </Suspense>
+
+                <div
+                  className="right-bottom-content mobile-hide"
+                  data-aos="fade-up"
+                  data-aos-duration="1500"
+                  data-aos-once="true"
+                >
+                  <div className="cerified-box">
+                    <h4>Zertifizierter Online-shop</h4>
+                    <img
+                      className="certified-logo"
+                      src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/png-clipart-trusted-shops-gmbh-e-commerce-logo-organization-certification-trust-no-one-text-trademark_copy.webp?v=1721658737"
+                      alt="certified logo"
+                    />
+                  </div>
+                  <div className="certified-logo">
+                    <h4>Schneller Versand</h4>
+                    <img className="dhl-logo" src={dhlLogo} alt="dhl logo" />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <Analytics.ProductView
         data={{
@@ -193,6 +452,174 @@ export default function Product() {
           ],
         }}
       />
+    </div>
+  );
+}
+
+function ProductPrice({selectedVariant}) {
+  return (
+    <div className="product-price">
+      {selectedVariant?.compareAtPrice ? (
+        <>
+          <p>Sale</p>
+          <br />
+          <div className="product-price-on-sale">
+            {selectedVariant ? <Money data={selectedVariant.price} /> : null}
+            <s>
+              <Money data={selectedVariant.compareAtPrice} />
+            </s>
+          </div>
+        </>
+      ) : (
+        selectedVariant?.price && (
+          <Money className="p-price" data={selectedVariant?.price} />
+        )
+      )}
+    </div>
+  );
+}
+
+function ProductForm({product, selectedVariant, variants}) {
+  const [quantity, setQuantity] = useState(1);
+  const {publish, shop, cart, prevCart} = useAnalytics();
+  const handleQuantityChange = (newQuantity) => {
+    setQuantity(newQuantity);
+  };
+
+  return (
+    <div className="product-form-main">
+      <div className="product-form">
+        <VariantSelector
+          handle={product.handle}
+          options={product.options}
+          variants={variants}
+        >
+          {({option}) => <ProductOptions key={option.name} option={option} />}
+        </VariantSelector>
+        <br />
+        <ProductQuantity
+          quantity={quantity}
+          onQuantityChange={handleQuantityChange}
+        />
+        <br />
+        <AddToCartButton
+          disabled={!selectedVariant || !selectedVariant.availableForSale}
+          onClick={() => {
+            window.location.href = window.location.href + '#cart-aside';
+            publish('cart_viewed', {
+              cart,
+              prevCart,
+              shop,
+              url: window.location.href || '',
+            });
+          }}
+          lines={
+            selectedVariant
+              ? [
+                  {
+                    merchandiseId: selectedVariant.id,
+                    quantity,
+                  },
+                ]
+              : []
+          }
+        >
+          {selectedVariant?.availableForSale
+            ? 'In den Warenkorb'
+            : 'Ausverkauft'}
+        </AddToCartButton>
+      </div>
+    </div>
+  );
+}
+
+function ProductOptions({option}) {
+  return (
+    <div className="product-options" key={option.name}>
+      <h5>{option.name}</h5>
+      <div className="product-options-grid">
+        {option.values.map(({value, isAvailable, isActive, to}) => {
+          return (
+            <Link
+              className="product-options-item"
+              key={option.name + value}
+              prefetch="intent"
+              preventScrollReset
+              replace
+              to={to}
+              style={{
+                border: isActive ? '1px solid black' : '1px solid transparent',
+                opacity: isAvailable ? 1 : 0.3,
+              }}
+            >
+              {value}
+            </Link>
+          );
+        })}
+      </div>
+      <br />
+    </div>
+  );
+}
+
+function AddToCartButton({analytics, children, disabled, lines, onClick}) {
+  return (
+    <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
+      {(fetcher) => (
+        <>
+          <input
+            name="analytics"
+            type="hidden"
+            value={JSON.stringify(analytics)}
+          />
+          <button
+            className="yellow-btn"
+            type="submit"
+            onClick={onClick}
+            disabled={disabled ?? fetcher.state !== 'idle'}
+          >
+            {children}
+          </button>
+        </>
+      )}
+    </CartForm>
+  );
+}
+
+function ProductQuantity({quantity, onQuantityChange}) {
+  const handleQuantityChange = (event) => {
+    const value = Math.max(1, parseInt(event.target.value, 10) || 1);
+    onQuantityChange(value);
+  };
+
+  const incrementQuantity = () => {
+    onQuantityChange(quantity + 1);
+  };
+
+  const decrementQuantity = () => {
+    onQuantityChange(Math.max(1, quantity - 1));
+  };
+
+  return (
+    <div className="product-quantity">
+      <label htmlFor="quantity">Quantity:</label>
+      <div className="quantity-controls">
+        <button type="button" onClick={decrementQuantity}>
+          -
+        </button>
+        <input
+          type="number"
+          id="quantity"
+          name="quantity"
+          value={quantity}
+          onChange={handleQuantityChange}
+          min="1"
+          step="1"
+        />
+        <button type="button" onClick={incrementQuantity}>
+          +
+        </button>
+      </div>
     </div>
   );
 }
@@ -226,7 +653,7 @@ const PRODUCT_VARIANT_FRAGMENT = `#graphql
       value
     }
     sku
-    title
+      title
     unitPrice {
       amount
       currencyCode
@@ -242,6 +669,11 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    metafields(identifiers: [{namespace: "custom", key: "nutritional_values"}, {namespace: "custom", key: "additional_information"}, {namespace: "custom", key: "ingredients"}, {namespace: "custom", key: "preparation"}]) {
+      namespace
+      key
+      value
+    }
     options {
       name
       values
@@ -257,6 +689,28 @@ const PRODUCT_FRAGMENT = `#graphql
     seo {
       description
       title
+    }
+    media(first: 10) {
+      nodes {
+        __typename
+        ... on MediaImage {
+          id
+          image {
+            id
+            url
+            altText
+            width
+            height
+          }
+        }
+        ... on Video {
+          id
+          sources {
+            url
+            mimeType
+          }
+        }
+      }
     }
   }
   ${PRODUCT_VARIANT_FRAGMENT}
@@ -299,9 +753,3 @@ const VARIANTS_QUERY = `#graphql
     }
   }
 `;
-
-/** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */
-/** @template T @typedef {import('@remix-run/react').MetaFunction<T>} MetaFunction */
-/** @typedef {import('storefrontapi.generated').ProductFragment} ProductFragment */
-/** @typedef {import('@shopify/hydrogen/storefront-api-types').SelectedOption} SelectedOption */
-/** @typedef {import('@shopify/remix-oxygen').SerializeFrom<typeof loader>} LoaderReturnData */

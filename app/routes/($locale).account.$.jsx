@@ -7,7 +7,11 @@ import {redirect} from '@shopify/remix-oxygen';
 export async function loader({context}) {
   await context.customerAccount.handleAuthStatus();
 
-  return redirect('/account');
+  return redirect('/account', {
+    headers: {
+      'Set-Cookie': await context.session.commit(),
+    },
+  });
 }
 
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */

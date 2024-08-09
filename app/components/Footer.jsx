@@ -1,39 +1,55 @@
-import {Suspense} from 'react';
-import {Await, NavLink} from '@remix-run/react';
-
+import {NavLink} from '@remix-run/react';
+import {useRootLoaderData} from '~/lib/root-data';
+import {KeepInTouch} from '~/routes/footerData';
+import footerLogo from '../assets/CurryWolf_Logo_footer.svg';
 /**
- * @param {FooterProps}
+ * @param {FooterQuery & {shop: HeaderQuery['shop']}}
  */
-export function Footer({footer: footerPromise, header, publicStoreDomain}) {
+
+export function Footer({menu, shop}) {
   return (
-    <Suspense>
-      <Await resolve={footerPromise}>
-        {(footer) => (
-          <footer className="footer">
-            {footer?.menu && header.shop.primaryDomain?.url && (
-              <FooterMenu
-                menu={footer.menu}
-                primaryDomainUrl={header.shop.primaryDomain.url}
-                publicStoreDomain={publicStoreDomain}
-              />
-            )}
-          </footer>
-        )}
-      </Await>
-    </Suspense>
+    <footer className="footer">
+      <div className='container'>
+       <div className='footer-inner'>
+      {menu && shop?.primaryDomain?.url && (
+        <>
+         <div className='footer-child'>
+            <FooterMenu menu={menu} primaryDomainUrl={shop.primaryDomain.url} />
+            <KeepInTouch />
+         </div>
+        </>
+      )}
+    </div>
+      </div>
+    </footer>
+  
   );
 }
+
+
+
 
 /**
  * @param {{
  *   menu: FooterQuery['menu'];
- *   primaryDomainUrl: FooterProps['header']['shop']['primaryDomain']['url'];
- *   publicStoreDomain: string;
+ *   primaryDomainUrl: HeaderQuery['shop']['primaryDomain']['url'];
  * }}
  */
-function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
+
+
+function FooterMenu({menu, primaryDomainUrl}) {
+  const {publicStoreDomain} = useRootLoaderData();
+
   return (
+    <div className='left-block-wrap'>
+      <div className='logo'>
+        <a href='/'>
+      <img className="footer-bg-img" data-aos="zoom-in" data-aos-duration="1500" data-aos-once="true" src={footerLogo} alt='footer-logo' />
+        </a>
+      </div>
     <nav className="footer-menu" role="navigation">
+      <span className='yellow-head' data-aos="fade-up" data-aos-duration="1500" data-aos-once="true">Links</span>
+        <ul data-aos="fade-up" data-aos-duration="1500" data-aos-once="true">
       {(menu || FALLBACK_FOOTER_MENU).items.map((item) => {
         if (!item.url) return null;
         // if the url is internal, we strip the domain
@@ -46,9 +62,10 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
         const isExternal = !url.startsWith('/');
         return isExternal ? (
           <a href={url} key={item.id} rel="noopener noreferrer" target="_blank">
-            {item.title}
-          </a>
+              {item.title}
+            </a>
         ) : (
+          <li key={item.url}>
           <NavLink
             end
             key={item.id}
@@ -56,11 +73,14 @@ function FooterMenu({menu, primaryDomainUrl, publicStoreDomain}) {
             style={activeLinkStyle}
             to={url}
           >
-            {item.title}
+          {item.title}
           </NavLink>
+          </li>
         );
       })}
+       </ul>
     </nav>
+    </div>
   );
 }
 
@@ -118,13 +138,6 @@ function activeLinkStyle({isActive, isPending}) {
     color: isPending ? 'grey' : 'white',
   };
 }
-
-/**
- * @typedef {Object} FooterProps
- * @property {Promise<FooterQuery|null>} footer
- * @property {HeaderQuery} header
- * @property {string} publicStoreDomain
- */
 
 /** @typedef {import('storefrontapi.generated').FooterQuery} FooterQuery */
 /** @typedef {import('storefrontapi.generated').HeaderQuery} HeaderQuery */

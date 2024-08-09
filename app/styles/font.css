@@ -1,0 +1,138 @@
+@font-face {
+    font-family: 'Days One';
+    src: url('./fonts/DaysOne-Regular.eot');
+    src: url('./fonts/DaysOne-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/DaysOne-Regular.woff2') format('woff2'),
+        url('./fonts/DaysOne-Regular.woff') format('woff'),
+        url('./fonts/DaysOne-Regular.ttf') format('truetype'),
+        url('./fonts/DaysOne-Regular.svg#DaysOne-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* @font-face {
+    font-family: 'Block Berthold';
+    src: url('./fonts/BlockBE-Heavy.eot');
+    src: url('./fonts/BlockBE-Heavy.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/BlockBE-Heavy.woff2') format('woff2'),
+        url('./fonts/BlockBE-Heavy.woff') format('woff'),
+        url('./fonts/BlockBE-Heavy.ttf') format('truetype'),
+        url('./fonts/BlockBE-Heavy.svg#BlockBE-Heavy') format('svg');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+} */
+
+@font-face {
+    font-family: 'Gotham';
+    src: url('./fonts/Gotham-Light.eot');
+    src: url('./fonts/Gotham-Light.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Gotham-Light.woff2') format('woff2'),
+        url('./fonts/Gotham-Light.woff') format('woff'),
+        url('./fonts/Gotham-Light.ttf') format('truetype'),
+        url('./fonts/Gotham-Light.svg#Gotham-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'RubikOne-Regular';
+    src: url('./fonts/RubikOne-Regular.eot');
+    src: url('./fonts/RubikOne-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/RubikOne-Regular.woff2') format('woff2'),
+        url('./fonts/RubikOne-Regular.woff') format('woff'),
+        url('./fonts/RubikOne-Regular.ttf') format('truetype'),
+        url('./fonts/RubikOne-Regular.svg#RubikOne-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Chivo-Regular';
+    src: url('./fonts/Chivo-Regular.eot');
+    src: url('./fonts/Chivo-Regular.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Chivo-Regular.woff2') format('woff2'),
+        url('./fonts/Chivo-Regular.woff') format('woff'),
+        url('./fonts/Chivo-Regular.ttf') format('truetype'),
+        url('./fonts/Chivo-Regular.svg#Chivo-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Gotham-Bold';
+    src: url('./fonts/Gotham-Bold.eot');
+    src: url('./fonts/Gotham-Bold.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Gotham-Bold.woff2') format('woff2'),
+        url('./fonts/Gotham-Bold.woff') format('woff'),
+        url('./fonts/Gotham-Bold.ttf') format('truetype'),
+        url('./fonts/Gotham-Bold.svg#Gotham-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Gotham-Book';
+    src: url('./fonts/Gotham-Book.eot');
+    src: url('./fonts/Gotham-Book.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Gotham-Book.woff2') format('woff2'),
+        url('./fonts/Gotham-Book.woff') format('woff'),
+        url('./fonts/Gotham-Book.ttf') format('truetype'),
+        url('./fonts/Gotham-Book.svg#Gotham-Book') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+@font-face {
+    font-family: 'Gotham-Medium';
+    src: url('./fonts/Gotham-Medium.eot');
+    src: url('./fonts/Gotham-Medium.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/Gotham-Medium.woff2') format('woff2'),
+        url('./fonts/Gotham-Medium.woff') format('woff'),
+        url('./fonts/Gotham-Medium.ttf') format('truetype'),
+        url('./fonts/Gotham-Medium.svg#Gotham-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Neue-Haas-Grotesk-Display-Pro';
+    src: url('./fonts/NeueHaasDisplay-Bold.eot');
+    src: url('./fonts/NeueHaasDisplay-Bold.eot?#iefix') format('embedded-opentype'),
+        url('./fonts/NeueHaasDisplay-Bold.woff2') format('woff2'),
+        url('./fonts/NeueHaasDisplay-Bold.woff') format('woff'),
+        url('./fonts/NeueHaasDisplay-Bold.ttf') format('truetype'),
+        url('./fonts/NeueHaasDisplay-Bold.svg#NeueHaasDisplay-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* @font-face {
+    font-family: GothamPro;
+    src: url(https://cdn.shopify.com/s/files/1/0661/7595/9260/files/GothamPro.eot?v=1663761097);
+    src: url(https://cdn.shopify.com/s/files/1/0661/7595/9260/files/GothamPro.woff2?v=1663760495) format("woff2"),url(https://cdn.shopify.com/s/files/1/0661/7595/9260/files/GothamPro.woff?v=1663760494) format("woff");
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: GothamPro;
+    src: url(https://cdn.shopify.com/s/files/1/0661/7595/9260/files/GothamPro-Bold.eot?v=1663838849);
+    src: url(https://cdn.shopify.com/s/files/1/0661/7595/9260/files/GothamPro-Bold.woff2?v=1663838848) format("woff2"),url(ttps://cdn.shopify.com/s/files/1/0661/7595/9260/files/GothamPro-Bold.woff?v=1663838848) format("woff");
+    font-weight: 600;
+    font-style: normal;
+} */
+
+@font-face {
+    font-family:BertholdBlock;
+    src: url(https://cdn.shopify.com/s/files/1/0661/7595/9260/files/d9895f95d51bcb22dc0f21fdef7c41db.eot?v=1665055890);
+    src: url(https://cdn.shopify.com/s/files/1/0661/7595/9260/files/d9895f95d51bcb22dc0f21fdef7c41db.eot?v=1665055890#iefix) format('embedded-opentype'),
+         url(https://cdn.shopify.com/s/files/1/0661/7595/9260/files/d9895f95d51bcb22dc0f21fdef7c41db.woff2?v=1665055891) format('woff2'),
+         url(https://cdn.shopify.com/s/files/1/0661/7595/9260/files/d9895f95d51bcb22dc0f21fdef7c41db.ttf?v=1665055890) format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}

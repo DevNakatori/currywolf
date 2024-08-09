@@ -22,6 +22,13 @@ export default async function handleRequest(
       checkoutDomain: context.env.PUBLIC_CHECKOUT_DOMAIN,
       storeDomain: context.env.PUBLIC_STORE_DOMAIN,
     },
+    scriptSrc: [
+      `https://www.googletagmanager.com`,
+      `https://cdn.shopify.com`, // Added the necessary script source here
+      `https://integrations.etrusted.com`,
+      `https://static.hotjar.com`,
+      `https://script.hotjar.com`
+    ]
   });
 
   const body = await renderToReadableStream(
@@ -42,10 +49,12 @@ export default async function handleRequest(
   if (isbot(request.headers.get('user-agent'))) {
     await body.allReady;
   }
-
   responseHeaders.set('Content-Type', 'text/html');
   responseHeaders.set('Content-Security-Policy', header);
-
+  responseHeaders.set(
+    'Content-Security-Policy',
+    `script-src 'self' https://* 'unsafe-inline' 'unsafe-eval' 'nonce-${nonce}'`
+  );
   return new Response(body, {
     headers: responseHeaders,
     status: responseStatusCode,

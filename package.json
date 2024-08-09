@@ -13,6 +13,7 @@
   },
   "prettier": "@shopify/prettier-config",
   "dependencies": {
+    "@fancyapps/ui": "^5.0.36",
     "@remix-run/react": "^2.10.1",
     "@remix-run/server-runtime": "^2.10.1",
     "@shopify/hydrogen": "2024.7.2",
@@ -21,7 +22,8 @@
     "graphql-tag": "^2.12.6",
     "isbot": "^3.8.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "aos": "^2.3.4"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.2",
