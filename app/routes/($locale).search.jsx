@@ -1,6 +1,6 @@
 import {defer} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
-import {getPaginationVariables, Analytics} from '@shopify/hydrogen';
+import {Analytics, getPaginationVariables} from '@shopify/hydrogen';
 
 import {SearchForm, SearchResults, NoSearchResults} from '~/components/Search';
 

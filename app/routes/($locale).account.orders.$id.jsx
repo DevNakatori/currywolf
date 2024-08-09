@@ -13,7 +13,7 @@ export const meta = ({data}) => {
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({params, context}) {
+export async function loader({params, context, request}) {
   if (!params.id) {
     return redirect('/account/orders');
   }
@@ -45,13 +45,20 @@ export async function loader({params, context}) {
     firstDiscount?.__typename === 'PricingPercentageValue' &&
     firstDiscount?.percentage;
 
-  return json({
-    order,
-    lineItems,
-    discountValue,
-    discountPercentage,
-    fulfillmentStatus,
-  });
+  return json(
+    {
+      order,
+      lineItems,
+      discountValue,
+      discountPercentage,
+      fulfillmentStatus,
+    },
+    {
+      headers: {
+        'Set-Cookie': await context.session.commit(),
+      },
+    },
+  );
 }
 
 export default function OrderRoute() {

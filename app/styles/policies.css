@@ -1,0 +1,487 @@
+.policy h1 {
+	margin: 0;
+ }
+ 
+ .policy,
+ .policies {
+	background: linear-gradient(180deg, #D02523 0%, #9B2220 67.26%);
+	padding-top: 50px;
+ }
+ 
+ .policies {
+	padding-top: 0;
+ }
+ 
+ .top-title {
+	text-align: center;
+	padding-bottom: 134px;
+ }
+ 
+ .policies-box fieldset {
+	border: 1px solid #fff;
+ }
+ 
+ .policies h1 {
+	text-align: center;
+	margin-top: 0;
+ }
+ 
+ .policies-box {
+	display: flex;
+	justify-content: center;
+	column-gap: 30px;
+	flex-wrap: wrap;
+ }
+ 
+ .policies-inner {
+	display: flex;
+	align-items: center;
+	column-gap: 30px;
+ }
+ 
+ .policies-box fieldset {
+	cursor: pointer;
+ }
+ 
+ .p-title {
+	width: 100%;
+ }
+ 
+ .policies-box fieldset a:hover {
+	text-decoration: none;
+ }
+ 
+ .policies-box fieldset:hover {
+	border: 1px solid #FEDE03;
+ }
+ 
+ .policies-box fieldset:hover a {
+	color: #FEDE03;
+ }
+ 
+ .policies {
+	height: calc(100vh - 413px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+ }
+ 
+ .privacy-policy-content .privacy-box p {
+	margin-bottom: 20px;
+ }
+ 
+ .policies-box fieldset a {
+	color: #fff;
+	font-size: calc(14px + (14 - 14) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(20px + (20 - 20) * ((100vw - 320px) / (1920 - 320)));
+ }
+ 
+ .top-title h1 {
+	color: #fff;
+ }
+ 
+ .privacy-policy-content .privacy-box {
+	border-top: 1px solid #fff;
+	border-bottom: 1px solid #fff;
+	padding: 40px 0;
+ }
+ 
+ .privacy-policy-content .privacy-box h3 {
+	margin-top: 0;
+	font-size: 25px;
+	line-height: 29px;
+	font-family: 'Block Berthold';
+	color: #fff;
+	margin-bottom: 25px;
+ }
+ 
+ .privacy-policy-content .privacy-box p {
+	color: #fff;
+	font-family: 'Gotham-Book';
+ }
+ 
+ .privacy-policy-content .privacy-box:nth-child(1) p {
+	margin-bottom: 0;
+ }
+ 
+ .privacy-policy-content h4 {
+	font-size: 20px;
+	color: #fff;
+	line-height: 24px;
+	font-family: 'Gotham-Book';
+	margin-bottom: 20px;
+	margin-top: 0;
+ }
+ 
+ .privacy-policy-content ul {
+	padding-left: 20px;
+ }
+ 
+ .privacy-policy-content ul li {
+	font-size: 18px;
+	line-height: 20px;
+	color: #fff;
+	font-family: 'Gotham-Book';
+	padding-bottom: 7px;
+ }
+ 
+ .privacy-policy-content .tabContent .tab-box {
+	display: flex;
+ }
+ 
+ .privacy-policy-content .tabContent.hide {
+	display: none;
+ }
+ 
+ .privacy-policy-content .tabContent.show {
+	display: block;
+ }
+ 
+ .privacy-policy-content .akz-wrap {
+	display: flex;
+	margin-bottom: 55px;
+ }
+ 
+ .privacy-policy-content .akz-wrap ul {
+	width: 408px;
+ }
+ 
+ .privacy-policy-content address {
+	font-size: 18px;
+	line-height: 21px;
+	font-family: 'Gotham-Book';
+	color: #fff;
+ }
+ 
+ .privacy-policy-content .privacy-box:nth-child(3) h4 {
+	margin: 50px 0 43px;
+ }
+ 
+ .privacy-policy-content .privacy-box:nth-child(4) h4 {
+	margin: 40px 0 30px;
+ }
+ 
+ .privacy-inner-box {
+	display: flex;
+ }
+ 
+ .privacy-inner-box .p-child-box {
+	width: 408px;
+ }
+ 
+ .privacy-box .c-right-wrap {
+	display: flex;
+	width: 50%;
+	margin-bottom: 35px;
+ }
+ 
+ .privacy-box .c-right-wrap .right-inner {
+	display: flex;
+	align-items: center;
+	width: 50%;
+ }
+ 
+ .privacy-box .c-right-wrap .right-inner .r-content {
+	padding-left: 30px;
+ }
+ 
+ .privacy-box .c-right-wrap .right-inner .r-content p {
+	font-size: 20px;
+	line-height: 23px;
+	color: #fff;
+	font-family: 'Block Berthold';
+ }
+ 
+ .p-block p {
+	font-size: 15px;
+	line-height: 18px;
+	font-family: 'Gotham-Book';
+	color: #fff;
+	max-width: 656px;
+ }
+ 
+ .privacy-box .inner-tab {
+	border-radius: 10px;
+	max-width: 472px;
+	display: flex;
+	background: linear-gradient(0deg, #FFFFFF, #FFFFFF), radial-gradient(63.11% 63.11% at 31.97% 19.67%, rgba(255, 255, 255, 0.63) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%);
+	box-shadow: 4px 5px 15px 0px #00000040;
+	margin-bottom: 76px;
+ }
+ 
+ .privacy-box .inner-tab .tab {
+	cursor: pointer;
+	font-size: 20px;
+	line-height: 24px;
+	color: #1E1E1E !important;
+	border-radius: 10px;
+	width: 50%;
+	padding: 9px 20px;
+	text-align: center;
+ }
+ 
+ .privacy-box .inner-tab .tab.whiteborder {
+	background: linear-gradient(0deg, #FEDE03, #FEDE03),
+	   radial-gradient(63.11% 63.11% at 31.97% 19.67%, rgba(255, 255, 255, 0.63) 0%, rgba(255, 255, 255, 0) 69.79%, rgba(255, 255, 255, 0) 100%)
+	   /* warning: gradient uses a rotation that is not supported by CSS and may not behave as expected */
+	;
+ }
+ 
+ .policy .yellow-border-btn {
+	color: #FEDE03;
+ }
+ 
+ .policy .yellow-border-btn:hover {
+	color: #9B2220;
+ }
+ 
+ .policy,
+ .policy p,
+ .policy span,
+ .policy a,
+ .policy ul li,
+ .privacy-box .inner-tab .tab,
+ .privacy-policy-content ul li,
+ .privacy-policy-content address {
+	font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(18px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+	color: #fff;
+	font-family: 'Gotham-Book';
+	list-style: disc;
+ }
+ 
+ .privacy-policy-content .privacy-box:last-child {
+	border-bottom: 0;
+ }
+ 
+ .policy ul {
+	list-style: none;
+	margin: revert;
+	padding: revert;
+ }
+ 
+ .policy ul li {
+	padding-bottom: 15px;
+ }
+ 
+ .policy-sec p,
+ .policy p {
+	padding: 10px 0px;
+ }
+ 
+ .term-sec h2 {
+	font-family: 'Block Berthold';
+	font-size: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+	color: #fff;
+ }
+ 
+ .term-sec h3 {
+	font-size: calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(16px + (22 - 16) * ((100vw - 320px) / (1920 - 320)));
+	color: #fff;
+ }
+ 
+ .policy-sec {
+	background: linear-gradient(180deg, #D02523 0%, #9B2220 67.26%);
+ }
+ 
+ .policy-sec p,
+ .policy-sec ul li {
+	font-size: calc(14px + (14 - 14) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(20px + (20 - 20) * ((100vw - 320px) / (1920 - 320)));
+	font-family: 'Gotham-Book';
+	font-weight: 400;
+	color: #fff;
+ }
+ 
+ .policy-sec ul li {
+	list-style-type: disc;
+	padding-bottom: 15px;
+	color: #fff;
+ }
+ 
+ .policy-sec h2 {
+	font-size: calc(22px + (30 - 22) * ((100vw - 320px) / (1920 - 320)));
+	font-weight: 700;
+	line-height: calc(22px + (30 - 22) * ((100vw - 320px) / (1920 - 320)));
+	font-family: 'BertholdBlock';
+	margin: 15px 0;
+	color: #fff;
+ }
+ 
+ .policy-sec h3 {
+	font-size: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+	font-weight: 700;
+	line-height: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+	font-family: 'Gotham-Book';
+	margin: 15px 0;
+	color: #fff;
+ }
+ 
+ .policy-sec h4 {
+	font-size: calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(25px + (30 - 25) * ((100vw - 320px) / (1920 - 320)));
+	font-weight: 700;
+	font-family: 'Gotham-Book';
+	margin: 15px 0;
+	color: #fff;
+ }
+ 
+ 
+ .policy-sec {
+	background: linear-gradient(180deg, #D02523 0%, #9B2220 67.26%);
+ }
+ 
+ .policy-sec p,
+ .policy-sec ul li {
+	font-size: calc(14px + (14 - 14) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(20px + (20 - 20) * ((100vw - 320px) / (1920 - 320)));
+	font-family: 'Gotham-Book';
+	font-weight: 400;
+	color: #fff;
+ }
+ 
+ .policy-sec ul li {
+	list-style-type: disc;
+	padding-bottom: 15px;
+	color: #fff;
+ }
+ 
+ .policy-sec h2 {
+	font-size: calc(22px + (30 - 22) * ((100vw - 320px) / (1920 - 320)));
+	font-weight: 700;
+	line-height: calc(22px + (30 - 22) * ((100vw - 320px) / (1920 - 320)));
+	font-family: 'BertholdBlock';
+	margin: 15px 0;
+	color: #fff;
+ }
+ 
+ .policy-sec h3 {
+	font-size: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+	font-weight: 700;
+	line-height: calc(20px + (30 - 20) * ((100vw - 320px) / (1920 - 320)));
+	font-family: 'Gotham-Book';
+	margin: 15px 0;
+	color: #fff;
+ }
+ 
+ .policy-sec h4 {
+	font-size: calc(20px + (25 - 20) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(25px + (30 - 25) * ((100vw - 320px) / (1920 - 320)));
+	font-weight: 700;
+	font-family: 'Gotham-Book';
+	margin: 15px 0;
+	color: #fff;
+ }
+ 
+ 
+ @media (max-width:1024px) {
+	.policies-box fieldset {
+	   width: 40%;
+	}
+ 
+	.policies-inner {
+	   row-gap: 20px;
+	   flex-wrap: wrap;
+	   justify-content: center;
+	   text-align: center;
+	}
+	.policies{
+		padding: 70px 0;
+	}
+ }
+ 
+ @media (max-width:767px) {
+	.policies{
+		padding: 120px 0;
+	}
+	.policy h1 {
+		overflow-wrap: anywhere;
+	}
+	.policy-sec p, .policy-sec ul li{overflow-wrap: anywhere;}
+	.top-title {
+	   padding-bottom: 35px;
+	   padding-top: 30px;
+	}
+ 
+	.privacy-policy-content .privacy-box {
+	   padding: 35px 0;
+	}
+ 
+	.privacy-box .inner-tab {
+	   margin-bottom: 45px;
+	}
+ 
+	.privacy-policy-content .tabContent .tab-box,
+	.privacy-inner-box {
+	   flex-direction: column;
+	}
+ 
+	.privacy-policy-content .akz-wrap {
+	   margin-bottom: 35px;
+	}
+ 
+	.privacy-policy-content .privacy-box:nth-child(4) h4 {
+	   margin: 30px 0 30px;
+	}
+ 
+	.privacy-box .c-right-wrap .right-inner {
+	   width: 100%;
+	}
+ 
+	.privacy-box .c-right-wrap {
+	   width: 100%;
+	   flex-direction: column;
+	}
+ 
+	.privacy-box .c-right-wrap .right-inner .l-logo {
+	   width: 136px;
+	   text-align: center;
+	}
+ 
+	.privacy-box .c-right-wrap .right-inner .r-content p br {
+	   display: none;
+	}
+ 
+	.privacy-policy-content .privacy-box h3 {
+	   font-size: 20px;
+	   line-height: 25px;
+	}
+ 
+	.privacy-policy-content h4 {
+	   font-size: 18px;
+	}
+ 
+	.privacy-policy-content h4:nth-child(2) {
+	   margin-top: 20px;
+	}
+ 
+	.privacy-inner-box .p-child-box,
+	.privacy-policy-content .akz-wrap ul {
+	   width: auto;
+	}
+ 
+	.privacy-policy-content .akz-wrap {
+	   flex-direction: column;
+	}
+ 
+	.privacy-box .inner-tab .tab {
+	   padding: 9px 15px;
+	}
+ 
+	.policies-box fieldset {
+	   width: 100%;
+	   margin: 0 20px;
+	}
+ 
+	.tab-inner-content:nth-child(2) {
+	   margin-top: 20px;
+	}
+ 
+	.p-child-box:nth-child(2),
+	.p-child-box:nth-child(3) {
+	   margin-top: 20px;
+	}
+ 
+ }

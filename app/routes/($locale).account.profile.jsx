@@ -20,7 +20,14 @@ export const meta = () => {
 export async function loader({context}) {
   await context.customerAccount.handleAuthStatus();
 
-  return json({});
+  return json(
+    {},
+    {
+      headers: {
+        'Set-Cookie': await context.session.commit(),
+      },
+    },
+  );
 }
 
 /**
@@ -65,15 +72,25 @@ export async function action({request, context}) {
       throw new Error('Customer profile update failed.');
     }
 
-    return json({
-      error: null,
-      customer: data?.customerUpdate?.customer,
-    });
+    return json(
+      {
+        error: null,
+        customer: data?.customerUpdate?.customer,
+      },
+      {
+        headers: {
+          'Set-Cookie': await context.session.commit(),
+        },
+      },
+    );
   } catch (error) {
     return json(
       {error: error.message, customer: null},
       {
         status: 400,
+        headers: {
+          'Set-Cookie': await context.session.commit(),
+        },
       },
     );
   }

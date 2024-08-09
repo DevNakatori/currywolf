@@ -1,12 +1,20 @@
 import {json} from '@shopify/remix-oxygen';
 import {useLoaderData, Link} from '@remix-run/react';
+import '../styles/policies.css';
 
 /**
  * @param {LoaderFunctionArgs}
  */
 export async function loader({context}) {
   const data = await context.storefront.query(POLICIES_QUERY);
-  const policies = Object.values(data.shop || {});
+  const policies = Object.values(data.shop || {}).filter(Boolean);
+
+  const legalNoticePolicy = {
+    id: 'legal-notice-id',
+    title: 'Legal Notice',
+    handle: 'legal-notice',
+  };
+  policies.push(legalNoticePolicy);
 
   if (!policies.length) {
     throw new Response('No policies found', {status: 404});
@@ -21,16 +29,19 @@ export default function Policies() {
 
   return (
     <div className="policies">
-      <h1>Policies</h1>
-      <div>
-        {policies.map((policy) => {
-          if (!policy) return null;
-          return (
+      <div className='policies-box'>
+        <div className='p-title'>
+          <h1>Policies</h1>
+        </div>
+        <div className='policies-inner'>
+          {policies.map((policy) => (
             <fieldset key={policy.id}>
-              <Link to={`/policies/${policy.handle}`}>{policy.title}</Link>
+              <Link to={policy.handle === 'legal-notice' ? `/pages/${policy.handle}` : `/policies/${policy.handle}`}>
+                {policy.title}
+              </Link>
             </fieldset>
-          );
-        })}
+          ))}
+        </div>
       </div>
     </div>
   );

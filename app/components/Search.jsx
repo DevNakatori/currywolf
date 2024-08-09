@@ -483,7 +483,7 @@ function pluralToSingularSearchType(type) {
  *   searchTerm: string;
  * }} FetchSearchResultsReturn
  */
-/** @typedef {Class<useFetcher<PredictiveSearchAPILoader>>>} ChildrenRenderProps */
+/** @typedef {Class<useFetcher<NormalizedPredictiveSearchResults>>>} ChildrenRenderProps */
 /**
  * @typedef {{
  *   action?: FormProps['action'];
@@ -505,11 +505,10 @@ function pluralToSingularSearchType(type) {
  *   item: NormalizedPredictiveSearchResultItem;
  * }} SearchResultItemProps
  */
-/** @typedef {Class<useFetcher<PredictiveSearchAPILoader>>['state']>} UseSearchReturn */
+/** @typedef {Class<useFetcher>['state']>} UseSearchReturn */
 
 /** @typedef {import('@remix-run/react').FormProps} FormProps */
 /** @typedef {import('storefrontapi.generated').PredictiveProductFragment} PredictiveProductFragment */
 /** @typedef {import('storefrontapi.generated').PredictiveCollectionFragment} PredictiveCollectionFragment */
 /** @typedef {import('storefrontapi.generated').PredictiveArticleFragment} PredictiveArticleFragment */
 /** @typedef {import('storefrontapi.generated').SearchQuery} SearchQuery */
-/** @typedef {import('../routes/api.predictive-search').PredictiveSearchAPILoader} PredictiveSearchAPILoader */

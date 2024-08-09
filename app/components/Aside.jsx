@@ -1,37 +1,37 @@
-import {createContext, useContext, useState} from 'react';
-
 /**
- * A side bar component with Overlay
+ * A side bar component with Overlay that works without JavaScript.
  * @example
  * ```jsx
- * <Aside type="search" heading="SEARCH">
+ * <Aside id="search-aside" heading="SEARCH">
  *  <input type="search" />
  *  ...
  * </Aside>
  * ```
  * @param {{
  *   children?: React.ReactNode;
- *   type: AsideType;
  *   heading: React.ReactNode;
+ *   id?: string;
  * }}
  */
-export function Aside({children, heading, type}) {
-  const {type: activeType, close} = useAside();
-  const expanded = type === activeType;
-
+export function Aside({children, heading, id = 'aside', toggle, setToggle}) {
   return (
     <div
       aria-modal
-      className={`overlay ${expanded ? 'expanded' : ''}`}
+      className={`${toggle ? 'active' : ''} overlay`}
+      id={id}
       role="dialog"
     >
-      <button className="close-outside" onClick={close} />
+      <button
+        className="close-outside"
+        onClick={() => {
+          history.go(-1);
+          window.location.hash = '';
+        }}
+      />
       <aside>
         <header>
           <h3>{heading}</h3>
-          <button className="close reset" onClick={close}>
-            &times;
-          </button>
+          <CloseAside toggle={toggle} setToggle={setToggle} heading={heading} />
         </header>
         <main>{children}</main>
       </aside>
@@ -39,39 +39,29 @@ export function Aside({children, heading, type}) {
   );
 }
 
-const AsideContext = createContext(null);
-
-Aside.Provider = function AsideProvider({children}) {
-  const [type, setType] = useState('closed');
-
+function CloseAside({toggle, setToggle, heading}) {
   return (
-    <AsideContext.Provider
-      value={{
-        type,
-        open: setType,
-        close: () => setType('closed'),
-      }}
+    /* eslint-disable-next-line jsx-a11y/anchor-is-valid */
+    <div
+      className="close-popup"
+      id="closeBtn"
+      onClick={
+        heading === 'CART' ? () => history.go(-1) : () => setToggle(!toggle)
+      }
     >
-      {children}
-    </AsideContext.Provider>
+      <div className="outer">
+        <div className="inner">
+          {heading === 'CART' ? (
+            <a className="close" href="#">
+              <span>Back</span>
+            </a>
+          ) : (
+            <a className="close" href="#">
+              <span>Back</span>
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
   );
-};
-
-export function useAside() {
-  const aside = useContext(AsideContext);
-  if (!aside) {
-    throw new Error('useAside must be used within an AsideProvider');
-  }
-  return aside;
 }
-
-/** @typedef {'search' | 'cart' | 'mobile' | 'closed'} AsideType */
-/**
- * @typedef {{
- *   type: AsideType;
- *   open: (mode: AsideType) => void;
- *   close: () => void;
- * }} AsideContextValue
- */
-
-/** @typedef {import('react').ReactNode} ReactNode */

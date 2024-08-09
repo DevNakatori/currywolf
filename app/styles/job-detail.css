@@ -1,0 +1,379 @@
+.job-detail .food-decorative-garland img {
+	position: relative;
+ }
+ 
+ .job-detail {
+	padding-bottom: 60px;
+	position: relative;
+	z-index: 1;
+ }
+ 
+ .job-detail-main {
+	background: linear-gradient(180deg, #D02523 0%, #9B2220 56.13%);
+	overflow: hidden;
+ }
+ 
+ .job-detail-main a.yellow-btn {
+	padding: 7px 20px;
+ }
+ 
+ .top-job-detail .job-detail-left h1 {
+	text-transform: uppercase;
+	margin-top: 20px;
+	margin-bottom: 67px;
+ }
+ 
+ .img-big-wrap {
+	position: relative;
+	height: auto;
+	width: calc(100% / 2);
+ }
+ 
+ .img-one {
+	width: 100%;
+	background: #fff;
+	position: relative;
+	height: 100%;
+	box-shadow: 0px 4px 20px 0px #00000040;
+	padding-bottom: 10px;
+	transform: rotate(7deg);
+ }
+ 
+ .img-one:before {
+	content: "";
+	position: absolute;
+	top: -50px;
+	background: url(/app/assets/pushpin.svg) no-repeat center / contain;
+	left: 0px;
+	right: 0;
+	width: 70px;
+	height: 94px;
+	margin: 0 auto;
+	background-size: 100%;
+	transform: rotate(8deg);
+ }
+ 
+ .inner-white-box {
+	padding: 10px;
+	margin-top: 0px;
+ }
+ 
+ .img-one img {
+	width: 100%;
+ }
+ 
+ .job-detail .curywolf-catering-box .inner-content p {
+	font-size: calc(18px + (24 - 18) * ((100vw - 320px) / (1920 - 320)));
+  line-height: calc(20px + (34 - 20) * ((100vw - 320px) / (1920 - 320)));
+	color: #1D1D1D;
+	font-family: 'BertholdBlock';
+	text-align: center;
+ }
+ 
+ .top-job-detail {
+	display: flex;
+ }
+ 
+ .job-detail .curywolf-catering-box {
+	display: flex;
+	position: absolute;
+	right: 0;
+ }
+ 
+ .job-detail .img-big-wrap a:hover {
+	text-decoration: none;
+ }
+ 
+ .job-detail .img-big-wrap {
+	top: -95px;
+	right: -99px;
+	width: 340px;
+ }
+ 
+ .job-detail .img-big-wrap .img-one:before {
+	width: 65px;
+ }
+ 
+ .job-detail .img-big-wrap:nth-child(2) .img-one:before {
+	background: url(/app/assets/pushpin-2.svg) no-repeat center / contain;
+	width: 65px;
+ }
+ 
+ .job-detail .curywolf-catering-box .img-big-wrap:nth-child(1) {
+	top: 133px;
+	right: -122px;
+ }
+ 
+ .job-detail .curywolf-catering-box .img-big-wrap:nth-child(1) .img-one {
+	transform: rotate(-13deg);
+ }
+ 
+ .job-detail {
+	overflow: hidden;
+ }
+ 
+ .job-detail-left p {
+	max-width: 650px;
+ }
+ 
+ .white-border {
+	border-bottom: 1px solid #fff;
+	width: 802px;
+	margin:70px 0;
+ }
+ 
+ .job-detail-wrap {
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #fff;
+	padding-bottom: 44px;
+	margin-bottom: 60px;
+ }
+ 
+ .job-detail-wrap h3 {
+	font-size: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(22px + (24 - 22) * ((100vw - 320px) / (1920 - 320)));
+	color: #fff;
+	font-family: 'BertholdBlock';
+	margin-bottom: 25px;
+ }
+ 
+ .job-detail-wrap ul {
+	padding-left: 20px;
+ }
+ 
+ .job-detail-wrap ul li {
+	font-size: calc(14px + (14 - 14) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(20px + (20 - 20) * ((100vw - 320px) / (1920 - 320)));
+	color: #fff;
+	font-family: 'Gotham-Book';
+	list-style-type: disc;
+	margin-bottom: 13px;
+	max-width: 607px;
+ }
+ 
+ .job-detail-wrap h4 {
+	font-size: calc(16px + (18 - 16) * ((100vw - 320px) / (1920 - 320)));
+	line-height: calc(18px + (20 - 18) * ((100vw - 320px) / (1920 - 320)));
+	color: #fff;
+	margin-bottom: 25px;
+ }
+ 
+ .job-detail-wrap .job-detail-ans ul:nth-child(1) {
+	margin-bottom: 40px;
+ }
+ 
+ .job-detail-das {
+	width: 65%;
+ }
+ 
+ .job-detail-ans {
+	width: 35%;
+ }
+ 
+ .job-detail-send-mail {
+	display: flex;
+ }
+ 
+ .job-detail-send-mail .detail-mail-left .yellow-btn {
+	padding: 12px 12px;
+	width: 100%;
+ }
+ 
+ .detail-mail-right {
+	max-width: 865px;
+	padding-left: 65px;
+ }
+ 
+ .detail-mail-right p:nth-child(2) {
+	margin-bottom: 20px;
+	font-weight: 600;
+ }
+ 
+ @media (max-width:1700px) {
+ }
+ 
+ @media (max-width:1500px) {
+	.top-job-detail .job-detail-left h1 {
+	   max-width: 980px;
+	}
+ 
+	.job-detail .curywolf-catering-box {
+	   right: -40px;
+	}
+ 
+	.job-detail .curywolf-catering-box .img-big-wrap:nth-child(1) {
+	   top: 153px;
+	   right: -136px;
+	}
+ 
+	.job-detail .img-one {
+	   width: 90%;
+	}
+ 
+	.white-border {
+	   margin: 107px 0 110px;
+	}
+ }
+ 
+ 
+ @media (max-width:1240px) {
+	.top-job-detail .job-detail-left h1 {
+	   max-width: 690px;
+	}
+ }
+ 
+ @media (max-width:1199px) {
+	.job-detail .img-one {
+	   width: 70%;
+	}
+ 
+	.job-detail .img-big-wrap {
+	   top: -82px;
+	   right: -142px;
+	}
+ 
+	.job-detail .curywolf-catering-box .img-big-wrap:nth-child(1) {
+	   top: 103px;
+	   right: -296px;
+	}
+	.job-detail-send-mail .detail-mail-left .yellow-btn{width: 150px;}
+ }
+ 
+ @media (max-width:1024px) {
+	.job-detail-wrap {
+	   flex-direction: column;
+	   padding-bottom: 14px;
+    margin-bottom: 50px;
+	}
+ 
+	.job-detail-das,
+	.job-detail-ans {
+	   width: 100%;
+	}
+ 
+	.white-border {
+	   margin: 87px 0 20px;
+	   width: 100%;
+	}
+ 
+	.top-job-detail .job-detail-left h1 {
+	   margin-bottom: 30px;
+	}
+ 
+	.job-detail .curywolf-catering-box {
+	   position: initial;
+	}
+ 
+	.top-job-detail {
+	   flex-wrap: wrap;
+	   justify-content: center;
+	}
+ 
+	.job-detail .curywolf-catering-box .img-big-wrap:nth-child(1) {
+	   top: 53px;
+	   right: 0;
+	}
+ 
+	.inner-white-box {
+	   padding: 10px;
+	}
+ 
+	.img-one {
+	   padding-bottom: 10px;
+	}
+ 
+	.job-detail .img-big-wrap {
+	   top: 60px;
+	   right: -10px;
+	}
+ 
+	.job-detail .go-back-pro-btn {
+	   margin-top: 20px;
+	}
+ 
+	.job-detail-right {
+	   padding: 30px 0 40px;
+	}
+ 
+	.job-detail-left p {
+	   max-width: initial;
+	}
+	
+ }
+ 
+ @media (max-width:767px) {
+	.job-detail-send-mail {
+	   flex-direction: column;
+	}
+	.job-detail .img-one{
+		width: 100%;
+	}
+	.detail-mail-right {
+	   max-width: initial;
+	   padding-left: 0;
+	   padding-top: 30px;
+	}
+ 
+	.job-detail-wrap {
+	   margin-bottom: 40px;
+	}
+	.job-detail{
+		padding-bottom: 50px;
+	}
+ 
+	.job-detail .curywolf-catering-box {
+	   position: initial;
+	}
+ 
+	.top-job-detail {
+	   flex-wrap: wrap;
+	}
+ 
+	.job-detail .curywolf-catering-box .img-big-wrap:nth-child(1) {
+	   top: 53px;
+	   right: 0;
+	}
+	.job-detail .img-big-wrap:nth-child(2) .img-one:before{width: 50px;}
+	.job-detail .img-big-wrap .img-one:before{width: 50px;}
+ 
+	.inner-white-box {
+	   padding: 10px;
+	}
+ 
+	.img-one {
+	   padding-bottom: 10px;
+	}
+ 
+	.job-detail .img-big-wrap {
+	   top: 60px;
+	   right: -10px;
+	}
+ 
+	.job-detail-wrap h3 {
+	   margin-bottom: 32px;
+	}
+ 
+	.job-detail-wrap h4 {
+	   margin-bottom: 30px;
+	}
+ 
+	.job-detail-wrap {
+	   padding-bottom: 0;
+	}
+ 
+	.top-job-detail .job-detail-left h1 {
+	   margin-bottom: 20px;
+	}
+ 
+	.job-detail-main a.yellow-btn {
+	   padding: 7px 20px;
+	   border-radius: 5px;
+	}
+ 
+	.job-detail .go-back-pro-btn {
+	   margin-top: 20px;
+	}
+	.job-detail-send-mail .detail-mail-left .yellow-btn{width: auto;}
+	.job-detail-send-mail .detail-mail-left .yellow-btn{padding:8px 12px;}
+ }

@@ -36,7 +36,14 @@ export async function loader({request, context}) {
     throw Error('Customer orders not found');
   }
 
-  return json({customer: data.customer});
+  return json(
+    {customer: data.customer},
+    {
+      headers: {
+        'Set-Cookie': await context.session.commit(),
+      },
+    },
+  );
 }
 
 export default function Orders() {

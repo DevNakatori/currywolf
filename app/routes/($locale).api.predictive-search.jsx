@@ -181,7 +181,7 @@ export function normalizePredictiveSearchResults(predictiveSearch, locale) {
           id: article.id,
           image: article.image,
           title: article.title,
-          url: `${localePrefix}/blogs/${article.blog.handle}/${article.handle}/${trackingParams}`,
+          url: `${localePrefix}/blog/${article.handle}${trackingParams}`,
         };
       }),
     });
@@ -196,9 +196,6 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
     id
     title
     handle
-    blog {
-      handle
-    }
     image {
       url
       altText
@@ -295,7 +292,6 @@ const PREDICTIVE_SEARCH_QUERY = `#graphql
  *   | 'PRODUCT'
  *   | 'QUERY'} PredictiveSearchTypes
  */
-/** @typedef {Class<loader>} PredictiveSearchAPILoader */
 
 /** @typedef {import('@shopify/remix-oxygen').LoaderFunctionArgs} LoaderFunctionArgs */
 /** @typedef {import('~/components/Search').NormalizedPredictiveSearch} NormalizedPredictiveSearch */
