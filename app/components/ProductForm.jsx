@@ -1,5 +1,5 @@
 import {Link} from '@remix-run/react';
-import {VariantSelector} from '@shopify/hydrogen';
+import {useAnalytics, VariantSelector} from '@shopify/hydrogen';
 import {AddToCartButton} from '~/components/AddToCartButton';
 import {useAside} from '~/components/Aside';
 
@@ -11,6 +11,7 @@ import {useAside} from '~/components/Aside';
  * }}
  */
 export function ProductForm({product, selectedVariant, variants}) {
+  const {publish, shop, cart, prevCart} = useAnalytics();
   const {open} = useAside();
   return (
     <div className="product-form">
@@ -26,6 +27,12 @@ export function ProductForm({product, selectedVariant, variants}) {
         disabled={!selectedVariant || !selectedVariant.availableForSale}
         onClick={() => {
           open('cart');
+          publish('cart_viewed', {
+            cart,
+            prevCart,
+            shop,
+            url: window.location.href || '',
+          });
         }}
         lines={
           selectedVariant
