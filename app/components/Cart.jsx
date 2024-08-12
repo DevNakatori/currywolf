@@ -20,7 +20,7 @@ export function CartMain({layout, cart}) {
   );
 }
 
-/** 
+/**
  * @param {CartMainProps}
  */
 function CartDetails({layout, cart}) {
@@ -84,7 +84,6 @@ function CartLineItem({layout, line}) {
       )}
 
       <div>
-
         <Link
           prefetch="intent"
           to={lineItemUrl}
@@ -123,7 +122,7 @@ function CartCheckoutActions({checkoutUrl}) {
 
   return (
     <div>
-      <a className='yellow-btn checkout' href={checkoutUrl} target="_self">
+      <a className="yellow-btn checkout" href={checkoutUrl} target="_self">
         <p>Weiter zur Kasse</p>
       </a>
       <br />
@@ -171,7 +170,7 @@ function CartLineRemoveButton({lineIds}) {
       inputs={{lineIds}}
     >
       <button type="submit">
-        <img src='https://cdn.shopify.com/s/files/1/0661/7595/9260/files/icons8-delete.svg?v=1720091772'/>
+        <img src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/icons8-delete.svg?v=1720091772" />
       </button>
     </CartForm>
   );
@@ -252,10 +251,12 @@ export function CartEmpty({hidden = false, layout = 'aside'}) {
     <div hidden={hidden}>
       <br />
       <p>
-      Sieht so aus, als hätten Sie noch nichts in den Einkaufswagen gelegt. Lassen Sie uns beginnen!
+        Sieht so aus, als hätten Sie noch nichts in den Einkaufswagen gelegt.
+        Lassen Sie uns beginnen!
       </p>
       <br />
-      <Link className="yellow-btn"
+      <Link
+        className="yellow-btn"
         to="/collections"
         onClick={() => {
           if (layout === 'aside') {
@@ -299,9 +300,16 @@ function CartDiscounts({discountCodes}) {
       {/* Show an input to apply a discount */}
       <UpdateDiscountForm discountCodes={codes}>
         <div className="discount-box">
-          <input type="text" name="discountCode" placeholder="Discount code" className="form-input" />
+          <input
+            type="text"
+            name="discountCode"
+            placeholder="Discount code"
+            className="form-input"
+          />
           &nbsp;
-          <button className="yellow-btn" type="submit">Apply</button>
+          <button className="yellow-btn" type="submit">
+            Apply
+          </button>
         </div>
       </UpdateDiscountForm>
     </div>
