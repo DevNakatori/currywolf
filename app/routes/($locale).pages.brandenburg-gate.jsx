@@ -1,7 +1,8 @@
 import {json} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import '../styles/location-inner.css';
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
+
 /**
  * @type {MetaFunction<typeof loader>}
  */
@@ -15,9 +16,7 @@ export const meta = ({data}) => {
 export async function loader({params, context}) {
   const handle = params.handle || 'brandenburg-gate';
   const {page} = await context.storefront.query(PAGE_QUERY, {
-    variables: {
-      handle: handle,
-    },
+    variables: {handle},
   });
 
   if (!page) {
@@ -25,7 +24,6 @@ export async function loader({params, context}) {
   }
 
   return json({page});
-
 }
 
 export default function Page() {
@@ -35,24 +33,31 @@ export default function Page() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    if (isPlaying && videoRef.current) {
-      videoRef.current.play();
-    }
-  }, [isPlaying]);
-
-  useEffect(() => {
+    // Assign the video element to the ref when component mounts
     const videoElement = document.querySelector('video');
     if (videoElement) {
       videoRef.current = videoElement;
       setIsPlaying(true);
     }
 
+    // Clean-up function to ensure proper stopping of video playback
     return () => {
-      if (videoElement) {
+      if (videoRef.current) {
+        videoRef.current.pause();
         setIsPlaying(false);
       }
     };
   }, []);
+
+  useEffect(() => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.play();
+      } else {
+        videoRef.current.pause();
+      }
+    }
+  }, [isPlaying]);
 
   return (
     <div className="page location-inner-main">

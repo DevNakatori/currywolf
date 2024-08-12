@@ -489,13 +489,13 @@ function ProductForm({product, selectedVariant, variants}) {
   return (
     <div className="product-form-main">
       <div className="product-form">
-        <VariantSelector
+        {/* <VariantSelector
           handle={product.handle}
           options={product.options}
           variants={variants}
         >
           {({option}) => <ProductOptions key={option.name} option={option} />}
-        </VariantSelector>
+        </VariantSelector> */}
         <br />
         <ProductQuantity
           quantity={quantity}
@@ -536,7 +536,7 @@ function ProductForm({product, selectedVariant, variants}) {
 function ProductOptions({option}) {
   return (
     <div className="product-options" key={option.name}>
-      <h5>{option.name}</h5>
+      {/* <h5>{option.name}</h5> */}
       <div className="product-options-grid">
         {option.values.map(({value, isAvailable, isActive, to}) => {
           return (
@@ -552,7 +552,7 @@ function ProductOptions({option}) {
                 opacity: isAvailable ? 1 : 0.3,
               }}
             >
-              {value}
+              {/* {value} */}
             </Link>
           );
         })}

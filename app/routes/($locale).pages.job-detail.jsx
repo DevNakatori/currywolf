@@ -12,9 +12,9 @@ export const meta = ({data}) => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({params, context}) {
-//   if (!params.handle) {
-//     throw new Error('Missing page handle');
-//   }
+  //   if (!params.handle) {
+  //     throw new Error('Missing page handle');
+  //   }
   const handle = params.handle || 'job-detail';
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
@@ -27,7 +27,6 @@ export async function loader({params, context}) {
   }
 
   return json({page});
-
 }
 
 export default function Page() {

@@ -1,7 +1,7 @@
 import {json} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import Contact from '~/components/ContactForm';
-import React from "react";
+import React from 'react';
 import '../styles/catering-cta-form.css';
 /**
  * @type {MetaFunction<typeof loader>}
@@ -14,9 +14,9 @@ export const meta = ({data}) => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({params, context}) {
-//   if (!params.handle) {
-//     throw new Error('Missing page handle');
-//   }
+  //   if (!params.handle) {
+  //     throw new Error('Missing page handle');
+  //   }
   const handle = params.handle || 'catering-cta-form';
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
@@ -38,7 +38,7 @@ export default function Page() {
   return (
     <div className="page catering-cta-form-page">
       <>
-      <main dangerouslySetInnerHTML={{__html: page.body}} />
+        <main dangerouslySetInnerHTML={{__html: page.body}} />
       </>
     </div>
   );
