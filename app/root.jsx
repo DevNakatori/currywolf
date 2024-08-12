@@ -192,7 +192,7 @@ export default function App() {
     location.pathname.includes('/collections/all');
 
   return (
-    <html lang="de">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -300,7 +300,7 @@ export function ErrorBoundary() {
   }
 
   return (
-    <html lang="de">
+    <html lang="en">
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
