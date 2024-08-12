@@ -127,11 +127,15 @@ function getLocaleFromRequest(request) {
   const firstPathPart = url.pathname.split('/')[1]?.toUpperCase() ?? '';
 
   let pathPrefix = '';
-  let [language, country] = ['DE', 'DE'];
+  let [language, country] = ['DE', 'DE']; // Default to German
 
   if (/^[A-Z]{2}-[A-Z]{2}$/i.test(firstPathPart)) {
     pathPrefix = '/' + firstPathPart;
     [language, country] = firstPathPart.split('-');
+  } else if (/^[A-Z]{2}$/i.test(firstPathPart)) {
+    language = firstPathPart;
+    country = language === 'EN' ? 'US' : 'DE'; // Default country for `en` is `US`
+    pathPrefix = '/' + firstPathPart;
   }
 
   return {language, country, pathPrefix};
