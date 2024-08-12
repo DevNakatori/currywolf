@@ -5,7 +5,9 @@ import {useLoaderData} from '@remix-run/react';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`}];
+  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`},
+    {name :"description","content": data.page.seo.description }
+  ];
 };
 
 /**

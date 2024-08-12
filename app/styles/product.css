@@ -288,6 +288,7 @@ main {
   padding: 0.450vw 1vw;
   color: #9B2220;
   border: 2px solid #FEDE03;
+  text-transform: initial;
 }
 
 .main-product-sec .product-form button.yellow-btn:hover {
