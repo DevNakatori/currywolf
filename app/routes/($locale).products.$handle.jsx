@@ -82,7 +82,6 @@ function ProductMedia({media}) {
 
   useLayoutEffect(() => {
     Fancybox.bind('[data-fancybox="main-image"]', {
-      // FancyBox options
     });
 
     return () => {
@@ -95,7 +94,7 @@ function ProductMedia({media}) {
   };
 
   if (!media || media.length === 0) {
-    return null; // Return early if media array is empty or undefined
+    return null;
   }
 
   const restImages = media.filter(

@@ -5,16 +5,15 @@ import '../styles/currywurst-page.css';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`}];
+  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`},
+    {name :"description","content": data.page.seo.description }
+  ];
 };
 
 /**
  * @param {LoaderFunctionArgs}
  */
 export async function loader({params, context}) {
-//   if (!params.handle) {
-//     throw new Error('Missing page handle');
-//   }
   const handle = params.handle || 'our-currywurst';
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
