@@ -1,4 +1,4 @@
-import {Suspense, useState, useRef, useEffect, useLayoutEffect} from 'react';
+import {Suspense, useState, useRef, useEffect} from 'react';
 import {defer, redirect} from '@shopify/remix-oxygen';
 import {Await, Link, useLoaderData} from '@remix-run/react';
 import {useNavigate} from 'react-router-dom';
@@ -80,7 +80,7 @@ function ProductMedia({media}) {
   );
   const videoRef = useRef(null);
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     Fancybox.bind('[data-fancybox="main-image"]', {
     });
 
@@ -92,15 +92,12 @@ function ProductMedia({media}) {
   const handleImageClick = (event) => {
     event.preventDefault();
   };
-
   if (!media || media.length === 0) {
     return null;
   }
-
   const restImages = media.filter(
     (item) => item.__typename === 'MediaImage' && item !== mainImage,
   );
-
   return (
     <div
       className="product-media"
@@ -165,11 +162,9 @@ function ProductMedia({media}) {
     </div>
   );
 }
-
 export default function Product() {
   const {product, variants} = useLoaderData();
   const {selectedVariant} = product;
-
   const getMetafieldText = (metafield) => {
     if (!metafield) return '';
 
@@ -504,13 +499,15 @@ function ProductForm({product, selectedVariant, variants}) {
         <AddToCartButton
           disabled={!selectedVariant || !selectedVariant.availableForSale}
           onClick={() => {
-            window.location.href = window.location.href + '#cart-aside';
             publish('cart_viewed', {
               cart,
               prevCart,
               shop,
               url: window.location.href || '',
             });
+            setTimeout(() => {
+              window.location.href = window.location.href + '#cart-aside';
+            }, 1500);
           }}
           lines={
             selectedVariant
