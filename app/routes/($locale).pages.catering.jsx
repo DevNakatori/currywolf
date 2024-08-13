@@ -36,11 +36,11 @@ export default function Page() {
 
   useEffect(() => {
     if (window.innerWidth < 768) {
-      setTimeout(function() {
+      setTimeout(function () {
         const sliderContainer = document.querySelector('.ref-wrap');
         const slides = document.querySelectorAll('.ref-box');
         let currentIndex = 0;
-        let slidesToShow = 1; 
+        let slidesToShow = 1;
 
         function updateSlider() {
           if (window.innerWidth < 768) {
@@ -50,10 +50,12 @@ export default function Page() {
           }
 
           const width = sliderContainer.clientWidth / slidesToShow;
-          slides.forEach(slide => {
+          slides.forEach((slide) => {
             slide.style.minWidth = `${width}px`;
           });
-          sliderContainer.style.transform = `translateX(${-width * currentIndex}px)`;
+          sliderContainer.style.transform = `translateX(${
+            -width * currentIndex
+          }px)`;
         }
 
         function nextSlide() {
@@ -74,7 +76,7 @@ export default function Page() {
           startAutoplay();
         }
 
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
           updateSlider();
           currentIndex = 0;
         });

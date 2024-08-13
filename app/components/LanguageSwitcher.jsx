@@ -1,38 +1,40 @@
-import {useNavigate} from '@remix-run/react';
+import {useNavigate, useLocation} from '@remix-run/react';
 import React, {useRef, useState, useEffect} from 'react';
+
 const LanguageSwitcher = () => {
-  const [currentPath, setCurrentPath] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownMenu = useRef(null);
   const navigate = useNavigate();
+  const location = useLocation();
+
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const path = window.location.pathname;
-      setCurrentPath(path);
-      setSelectedValue(path.startsWith('/en') ? 'en-de' : 'de-de');
-    }
-  }, []);
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
+    const path = location.pathname;
+    setSelectedValue(path.startsWith('/en') ? 'en-de' : 'de-de');
+  }, [location.pathname]); // Update when the path changes
+
   const handleLanguageChange = (event) => {
     const newValue = event.currentTarget.getAttribute('data-value');
     setSelectedValue(newValue);
     setIsDropdownOpen(false);
-    const isEnglishPath = currentPath.startsWith('/en');
+
     let newPath;
-    if (newValue === 'en-de' && !isEnglishPath) {
-      newPath = `/en${currentPath}`;
-    } else if (newValue === 'de-de' && isEnglishPath) {
-      newPath = currentPath.replace('/en', '');
+    if (newValue === 'en-de' && !location.pathname.startsWith('/en')) {
+      newPath = `/en${location.pathname}`;
+    } else if (newValue === 'de-de' && location.pathname.startsWith('/en')) {
+      newPath = location.pathname.replace('/en', '');
     } else {
-      newPath = currentPath;
+      newPath = location.pathname;
     }
     if (typeof window !== 'undefined') {
       window.location.href = newPath;
     }
   };
+
+  const toggleDropdown = () => {
+    setIsDropdownOpen(!isDropdownOpen);
+  };
+
   const flagSrc =
     selectedValue === 'de-de'
       ? 'https://cdn.shopify.com/s/files/1/0661/7595/9260/files/Flag-of-Germany-01.svg?v=1721643447'
@@ -41,7 +43,7 @@ const LanguageSwitcher = () => {
   return (
     <div className="language-switcher">
       <div className="dropdown-wrap" onClick={toggleDropdown}>
-        <img src={flagSrc} alt="Selected Language" onClick={toggleDropdown} />
+        <img src={flagSrc} alt="Selected Language" />
       </div>
       <div className="dropdown">
         <ul
@@ -74,4 +76,5 @@ const LanguageSwitcher = () => {
     </div>
   );
 };
+
 export default LanguageSwitcher;
