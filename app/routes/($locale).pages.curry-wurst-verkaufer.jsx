@@ -14,7 +14,7 @@ export const meta = ({data}) => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({params, context}) {
-  const handle = params.handle || 'job-detail';
+  const handle = params.handle || 'curry-wurst-verkaufer';
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
       handle: handle,
