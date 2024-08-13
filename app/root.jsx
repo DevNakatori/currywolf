@@ -18,15 +18,11 @@ import resetStyles from './styles/reset.css?url';
 import appStyles from './styles/app.css?url';
 import {Layout} from '~/components/Layout';
 import fontStyles from './styles/font.css?url';
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useLocation} from 'react-router-dom';
 import Popup from './components/Popup';
 import * as gtag from './util/gtag';
 
-/**
- * This is important to avoid re-fetching root queries on sub-navigations
- * @type {ShouldRevalidateFunction}
- */
 export const shouldRevalidate = ({formMethod, currentUrl, nextUrl}) => {
   if (formMethod && formMethod !== 'GET') {
     return true;
@@ -91,9 +87,6 @@ export function links() {
   ];
 }
 
-/**
- * @param {LoaderFunctionArgs}
- */
 export async function loader({context}) {
   const {storefront, customerAccount, cart, env} = context;
   const publicStoreDomain = context.env.PUBLIC_STORE_DOMAIN;
@@ -131,12 +124,7 @@ export async function loader({context}) {
         storefrontAccessToken: env.PUBLIC_STOREFRONT_API_TOKEN,
       },
     },
-    {
-      // headers: {
-      //   'Content-Security-Policy': "default-src 'self'; connect-src 'self' https://api.web3forms.com; script-src 'self'; style-src 'self';",
-      //     'Set-Cookie': await context.session.commit(),
-      // },
-    },
+    {},
   );
 }
 
@@ -146,12 +134,17 @@ export default function App() {
   const data = useLoaderData();
   const location = useLocation();
   const gaTrackingId = 'G-RMTF34SVQM';
+  const [canonicalUrl, setCanonicalUrl] = useState('');
 
   useEffect(() => {
     if (gaTrackingId?.length) {
       gtag.pageview(location.pathname, gaTrackingId);
     }
   }, [location, gaTrackingId]);
+
+  useEffect(() => {
+    setCanonicalUrl(`${window.location.origin}${location.pathname}`);
+  }, [location.pathname]);
 
   useEffect(() => {
     function setEqualHeight() {
@@ -196,6 +189,8 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
+        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
+        <meta name="robots" content="index, follow" />
         {!gaTrackingId ? null : (
           <>
             <script
@@ -254,29 +249,6 @@ export default function App() {
           <Layout {...data}>
             <Outlet />
           </Layout>
-          {/* <etrusted-widget data-etrusted-widget-id="wdg-2e85f348-ed56-48db-89c0-58c5d7fbc6b8"></etrusted-widget> */}
-          <script
-            async
-            data-desktop-y-offset="0"
-            data-mobile-y-offset="0"
-            data-desktop-disable-reviews="false"
-            data-desktop-enable-custom="false"
-            data-desktop-position="left"
-            data-desktop-custom-width="156"
-            data-desktop-enable-fadeout="false"
-            data-disable-mobile="false"
-            data-disable-trustbadge="false"
-            data-mobile-custom-width="156"
-            data-mobile-disable-reviews="false"
-            data-mobile-enable-custom="false"
-            data-mobile-position="left"
-            data-mobile-enable-topbar="false"
-            data-mobile-enable-fadeout="true"
-            data-color-scheme="light"
-            charSet="UTF-8"
-            nonce={nonce}
-            src={`https://widgets.trustedshops.com/js/X7C31CAC2688E2716F5D2E3220C01EE91.js`}
-          />
           <ScrollRestoration nonce={nonce} />
           <Scripts nonce={nonce} />
         </Analytics.Provider>

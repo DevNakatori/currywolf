@@ -7,7 +7,9 @@ import {useEffect, useRef, useState} from 'react';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`}];
+  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`},
+    {name :"description","content": data.page.seo.description }
+  ];
 };
 
 /**
@@ -33,14 +35,12 @@ export default function Page() {
   const [isPlaying, setIsPlaying] = useState(false);
 
   useEffect(() => {
-    // Assign the video element to the ref when component mounts
     const videoElement = document.querySelector('video');
     if (videoElement) {
       videoRef.current = videoElement;
       setIsPlaying(true);
     }
 
-    // Clean-up function to ensure proper stopping of video playback
     return () => {
       if (videoRef.current) {
         videoRef.current.pause();

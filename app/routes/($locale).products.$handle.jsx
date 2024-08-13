@@ -82,7 +82,6 @@ function ProductMedia({media}) {
 
   useEffect(() => {
     Fancybox.bind('[data-fancybox="main-image"]', {
-      // FancyBox options
     });
 
     return () => {
