@@ -1,12 +1,7 @@
-
 import {useNavigate, useLocation} from '@remix-run/react';
 import React, {useRef, useState, useEffect} from 'react';
 
 const LanguageSwitcher = () => {
-import {useNavigate} from '@remix-run/react';
-import React, {useRef, useState, useEffect} from 'react';
-const LanguageSwitcher = () => {
-  const [currentPath, setCurrentPath] = useState('');
   const [selectedValue, setSelectedValue] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownMenu = useRef(null);
@@ -18,16 +13,6 @@ const LanguageSwitcher = () => {
     setSelectedValue(path.startsWith('/en') ? 'en-de' : 'de-de');
   }, [location.pathname]); // Update when the path changes
 
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const path = window.location.pathname;
-      setCurrentPath(path);
-      setSelectedValue(path.startsWith('/en') ? 'en-de' : 'de-de');
-    }
-  }, []);
-  const toggleDropdown = () => {
-    setIsDropdownOpen(!isDropdownOpen);
-  };
   const handleLanguageChange = (event) => {
     const newValue = event.currentTarget.getAttribute('data-value');
     setSelectedValue(newValue);
@@ -49,6 +34,7 @@ const LanguageSwitcher = () => {
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
   };
+
   const flagSrc =
     selectedValue === 'de-de'
       ? 'https://cdn.shopify.com/s/files/1/0661/7595/9260/files/Flag-of-Germany-01.svg?v=1721643447'
@@ -90,4 +76,5 @@ const LanguageSwitcher = () => {
     </div>
   );
 };
+
 export default LanguageSwitcher;

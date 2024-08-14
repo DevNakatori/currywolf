@@ -1210,7 +1210,7 @@ interface GeneratedQueryTypes {
     return: SitemapQuery;
     variables: SitemapQueryVariables;
   };
-  '#graphql\n    query Page(\n      $language: LanguageCode,\n      $country: CountryCode,\n      $handle: String!\n    )\n    @inContext(language: $language, country: $country) {\n      page(handle: $handle) {\n        id\n        title\n        body\n        seo {\n          description\n          title\n        }\n      }\n    }\n': {
+  '#graphql\n      query Page(\n        $language: LanguageCode,\n        $country: CountryCode,\n        $handle: String!\n      )\n      @inContext(language: $language, country: $country) {\n        page(handle: $handle) {\n          id\n          title\n          body\n          seo {\n            description\n            title\n          }\n        }\n      }\n  ': {
     return: PageQuery;
     variables: PageQueryVariables;
   };
