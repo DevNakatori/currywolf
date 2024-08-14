@@ -1,5 +1,5 @@
-import {useCallback, useState} from 'react';
-import {Await, NavLink, useNavigate} from '@remix-run/react';
+import {useCallback, useEffect, useState} from 'react';
+import {Await, NavLink, useLocation, useNavigate} from '@remix-run/react';
 import {Suspense} from 'react';
 import {useRootLoaderData} from '~/lib/root-data';
 import shopLogo from '../assets/CurryWolf_Logo_footer.svg';
@@ -9,12 +9,24 @@ import LanguageSwitcher from './LanguageSwitcher';
  * @param {HeaderProps}
  */
 export function Header({header, isLoggedIn, cart, toggle, setToggle}) {
+  const [path, setPath] = useState('');
+  const location = useLocation();
+  useEffect(() => {
+    setPath(location.pathname);
+  }, [location.pathname]);
+  const getPath = () => {
+    if (location.pathname.startsWith('/en')) {
+      return '/en';
+    } else {
+      return '/';
+    }
+  };
   const {shop, menu} = header;
   return (
     <header className="header">
       <div className="container">
         <div className="inner-header">
-          <NavLink prefetch="intent" to="/" style={activeLinkStyle} end>
+          <NavLink prefetch="intent" to={getPath()} style={activeLinkStyle} end>
             <img
               className="desktop-logo"
               src={shopLogo}
