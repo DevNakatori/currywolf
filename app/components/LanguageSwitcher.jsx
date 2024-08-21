@@ -5,7 +5,6 @@ const LanguageSwitcher = () => {
   const [selectedValue, setSelectedValue] = useState('');
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownMenu = useRef(null);
-  const navigate = useNavigate();
   const location = useLocation();
 
   useEffect(() => {
@@ -19,7 +18,6 @@ const LanguageSwitcher = () => {
     setIsDropdownOpen(false);
 
     let newPath;
-
     if (newValue === 'en-de' && !location.pathname.startsWith('/en')) {
       newPath = `/en${location.pathname}`;
     } else if (newValue === 'de-de' && location.pathname.startsWith('/en')) {
@@ -27,10 +25,7 @@ const LanguageSwitcher = () => {
     } else {
       newPath = location.pathname;
     }
-
-    if (typeof window !== 'undefined') {
-      window.location.href = newPath;
-    }
+    window.location.href = newPath || '/';
   };
 
   const toggleDropdown = () => {
