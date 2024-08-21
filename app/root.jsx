@@ -249,6 +249,28 @@ export default function App() {
           <Layout {...data}>
             <Outlet />
           </Layout>
+          <script
+            async
+            data-desktop-y-offset="0"
+            data-mobile-y-offset="0"
+            data-desktop-disable-reviews="false"
+            data-desktop-enable-custom="false"
+            data-desktop-position="left"
+            data-desktop-custom-width="156"
+            data-desktop-enable-fadeout="false"
+            data-disable-mobile="false"
+            data-disable-trustbadge="false"
+            data-mobile-custom-width="156"
+            data-mobile-disable-reviews="false"
+            data-mobile-enable-custom="false"
+            data-mobile-position="left"
+            data-mobile-enable-topbar="false"
+            data-mobile-enable-fadeout="true"
+            data-color-scheme="light"
+            charSet="UTF-8"
+            nonce={nonce}
+            src={`https://widgets.trustedshops.com/js/X7C31CAC2688E2716F5D2E3220C01EE91.js`}
+          />
           <ScrollRestoration nonce={nonce} />
           <Scripts nonce={nonce} />
         </Analytics.Provider>

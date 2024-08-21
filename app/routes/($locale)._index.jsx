@@ -17,7 +17,7 @@ export const meta = ({data}) => {
  * @param {LoaderFunctionArgs}
  */
 export async function loader({params, context}) {
-  const handle = params.handle || 'new-homepage';
+  const handle = params.handle || 'index';
 
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
