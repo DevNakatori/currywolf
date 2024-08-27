@@ -34,7 +34,7 @@ main {
 }
 
 .product-images-wrap .product-image {
-  width: calc(100%/6);
+  width: calc(100% / 6);
 }
 
 .product-images-wrap .product-image img {
@@ -155,7 +155,15 @@ main {
 .main-product-sec .product-container .center-content .product-video video {
   width: 100%;
 }
-
+.main-product-sec .product-container ul {
+  list-style: disc;
+  margin: revert;
+  padding-left: 10px;
+}
+.main-product-sec .product-container ul li {
+  padding-bottom: 15px;
+  color: #fff;
+}
 .product-media {
   flex: 1;
   display: initial;
@@ -221,7 +229,6 @@ main {
 
 .smile-block .special-block:nth-child(2) img {
   width: 70px;
-
 }
 
 .quantity-controls input::-webkit-outer-spin-button,
@@ -246,7 +253,11 @@ main {
   font-weight: 400;
 }
 
-.main-product-sec .product-container .right-content .product-content p:last-child {
+.main-product-sec
+  .product-container
+  .right-content
+  .product-content
+  p:last-child {
   margin-top: 20px;
 }
 
@@ -284,16 +295,16 @@ main {
   border: 0;
   width: 200px;
   cursor: pointer;
-  background-color: #FEDE03;
-  padding: 0.450vw 1vw;
-  color: #9B2220;
-  border: 2px solid #FEDE03;
+  background-color: #fede03;
+  padding: 0.45vw 1vw;
+  color: #9b2220;
+  border: 2px solid #fede03;
   text-transform: initial;
 }
 
 .main-product-sec .product-form button.yellow-btn:hover {
-  border: 2px solid #FEDE03;
-  color: #FEDE03;
+  border: 2px solid #fede03;
+  color: #fede03;
   will-change: transform;
   text-decoration: none;
   background-color: transparent;
@@ -372,7 +383,7 @@ main {
 
 @supports (font: -apple-system-body) and (-webkit-appearance: none) {
   .quantity-controls button {
-     line-height: 24px;
+    line-height: 24px;
   }
 }
 
@@ -390,7 +401,7 @@ main {
   font-family: 'BertholdBlock';
 }
 
-#cart-aside main div>span {
+#cart-aside main div > span {
   color: #fff;
   font-size: 16px;
   font-family: 'Gotham-Book';
@@ -481,351 +492,350 @@ button.f-button:hover {
   outline: 0 !important;
 }
 
-@media (min-width:768px) {
+@media (min-width: 768px) {
   .product-form-main {
-     position: sticky;
-     top: 94px;
-     background: #9b2220;
-     z-index: 999;
-     display: block;
-     position: -webkit-sticky;
+    position: sticky;
+    top: 94px;
+    background: #9b2220;
+    z-index: 999;
+    display: block;
+    position: -webkit-sticky;
   }
 }
 
-@media (max-width:1440px) {
+@media (max-width: 1440px) {
   .product-media {
-     bottom: -140px;
+    bottom: -140px;
   }
 
   .smile-block h4 {
-     max-width: 160px;
+    max-width: 160px;
   }
 }
 
-@media (max-width:1380px) {
+@media (max-width: 1380px) {
   .smile-block .special-block {
-     width: 46%;
-     padding-left: 10px;
+    width: 46%;
+    padding-left: 10px;
   }
 
   .info-box {
-     padding-right: 10px;
+    padding-right: 10px;
   }
 
   .product-quantity {
-     margin-right: 10px;
+    margin-right: 10px;
   }
 
   .main-product-sec .food-decorative-garland img {
-     width: 100%;
+    width: 100%;
   }
 
   .main-product-sec .product-form button.yellow-btn {
-     width: 151px;
+    width: 151px;
   }
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   .left-inner-c {
-     flex-direction: column;
+    flex-direction: column;
   }
 
   .info-box:nth-child(1) {
-     border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #fff;
   }
 
   .info-box:nth-child(2) {
-     padding-bottom: 20px;
+    padding-bottom: 20px;
   }
 
   .info-wrap {
-     flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   .info-box {
-     width: 100%;
-     padding-right: 0;
+    width: 100%;
+    padding-right: 0;
   }
 
   .info-box:nth-child(1) {
-     margin-bottom: 20px;
+    margin-bottom: 20px;
   }
 
   .smile-block .special-block {
-     width: 100%;
-     padding-left: 0;
-     padding-bottom: 50px;
+    width: 100%;
+    padding-left: 0;
+    padding-bottom: 50px;
   }
 
   .info-wrap {
-     padding-bottom: 49px;
-     margin-bottom: 37px;
+    padding-bottom: 49px;
+    margin-bottom: 37px;
   }
 
   .main-product-sec .product-title h1 {
-     margin: 30px 0 40px;
+    margin: 30px 0 40px;
   }
 
   .right-product-content p {
-     word-break: break-all;
+    word-break: break-all;
   }
 
   .main-product-sec .product-form {
-     flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   .main-product-sec .product-form button.yellow-btn {
-     margin-top: 20px;
+    margin-top: 20px;
   }
 
   .smile-block .special-block img {
-     width: 40px;
-     height: 40px;
+    width: 40px;
+    height: 40px;
   }
 
   .right-content .product-content .metafield h2 {
-     font-size: 20px;
+    font-size: 20px;
   }
 
   .right-bottom-content.mobile-hide {
-     flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   .right-bottom-content .cerified-box:nth-child(1) h4 {
-     max-width: initial;
+    max-width: initial;
   }
 
   .right-bottom-content .cerified-box:nth-child(1) {
-     margin-bottom: 15px;
+    margin-bottom: 15px;
   }
 
   .main-product-sec .product-form {
-     margin-bottom: 100px;
+    margin-bottom: 100px;
   }
 
   .product-images-wrap {
-     column-gap: 10px;
-     padding-top: 15px;
-     margin-top: 15px;
+    column-gap: 10px;
+    padding-top: 15px;
+    margin-top: 15px;
   }
 
   .product-images-wrap .product-image img {
-     border-radius: 5px;
+    border-radius: 5px;
   }
 
   .go-back-pro-btn a {
-     font-size: 16px;
+    font-size: 16px;
   }
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .main-product-sec .product-container {
-     flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   .main-product-sec .product-container .left-content,
   .main-product-sec .product-container .center-content,
   .main-product-sec .product-container .right-content {
-     width: 100%;
+    width: 100%;
   }
 
   .product-media {
-     position: initial;
+    position: initial;
   }
 
   .main-product-sec .info-box p {
-     max-width: initial;
+    max-width: initial;
   }
 
   .smile-block p,
   .smile-block h4 {
-     max-width: initial;
+    max-width: initial;
   }
 
   .main-product-sec .product-form {
-     margin-bottom: 45px;
-     margin-top: 15px;
-     flex-direction: column;
-     align-items: flex-start;
+    margin-bottom: 45px;
+    margin-top: 15px;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .right-content .metafield .ingridiant-box {
-     margin-bottom: 35px;
+    margin-bottom: 35px;
   }
 
   .info-wrap {
-     padding-bottom: 35px;
+    padding-bottom: 35px;
   }
 
   .right-bottom-content .cerified-box:nth-child(1) {
-     margin-bottom: 25px;
+    margin-bottom: 25px;
   }
 
   .info-box:nth-child(1) {
-     margin-top: 35px;
+    margin-top: 35px;
   }
 
   .main-product-sec .product-form button.yellow-btn {
-     margin-top: 0px;
-     border-radius: 5px;
+    margin-top: 0px;
+    border-radius: 5px;
   }
 
   .smile-block .special-block:nth-child(2) img {
-     width: 60px;
+    width: 60px;
   }
 
   .product-quantity {
-     margin-right: 0px;
-     margin-bottom: 0px;
-     width: 100%;
+    margin-right: 0px;
+    margin-bottom: 0px;
+    width: 100%;
   }
 
   .main-product-sec .info-box p {
-     font-size: 16px;
+    font-size: 16px;
   }
 
   .main-product-sec .product-container .right-content {
-     order: 2;
-     padding-top: 5px;
+    order: 2;
+    padding-top: 5px;
   }
 
   .main-product-sec .product-container .center-content {
-     order: 1;
+    order: 1;
   }
 
   .main-product-sec .product-container .left-content {
-     order: 3;
-     margin-top: -40px;
+    order: 3;
+    margin-top: -40px;
   }
 
   .main-product-sec .product-container {
-     padding: 20px 0px 20px 0px;
+    padding: 20px 0px 20px 0px;
   }
 
   .right-content .metafield .ingridiant-box:nth-child(2) {
-     margin-bottom: 15px;
+    margin-bottom: 15px;
   }
 
   .right-bottom-content h4 {
-     margin-bottom: 15px;
+    margin-bottom: 15px;
   }
 
   .main-product-sec .product-title h1 {
-     margin: 30px 0 20px;
-     color: #fede03;
-     font-size: 30px;
-     line-height: 30px;
+    margin: 30px 0 20px;
+    color: #fede03;
+    font-size: 30px;
+    line-height: 30px;
   }
 
   .main-product-sec .product-title h1 span {
-     color: #fff;
-     font-size: 26px;
-     line-height: 26px;
+    color: #fff;
+    font-size: 26px;
+    line-height: 26px;
   }
 
   .quantity-controls button {
-     width: 25px;
-     height: 25px;
-     border-radius: 5px;
-     font-size: 21px;
-     line-height: 20px;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    font-size: 21px;
+    line-height: 20px;
   }
 
   .quantity-controls button:nth-child(1) {
-     line-height: 18px;
+    line-height: 18px;
   }
 
   .right-bottom-content .cerified-box:nth-child(1) {
-     width: 50%;
+    width: 50%;
   }
 
   .right-bottom-content {
-     width: 100%;
+    width: 100%;
   }
 
   .quantity-controls {
-     margin-bottom: 0px;
+    margin-bottom: 0px;
   }
 
   .smile-block .special-block img {
-     width: 50px;
-     height: 50px;
-     object-fit: contain;
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
   }
 
   .smile-block .special-block {
-     width: 48%;
-     padding-bottom: 35px;
-     padding-right: 10px;
+    width: 48%;
+    padding-bottom: 35px;
+    padding-right: 10px;
   }
 
   .desktop-hide {
-     display: inline-flex;
+    display: inline-flex;
   }
 
   .mobile-hide {
-     display: none;
+    display: none;
   }
 
   .right-bottom-content.mobile-hide {
-     display: none;
+    display: none;
   }
 
   .quantity-controls input {
-     width: 13%;
+    width: 13%;
   }
 
   .smile-block {
-     border-bottom: 1px solid #fff;
-     margin-bottom: 35px;
+    border-bottom: 1px solid #fff;
+    margin-bottom: 35px;
   }
 
   .go-back-pro-btn a {
-     font-size: 14px;
-     border-radius: 5px;
+    font-size: 14px;
+    border-radius: 5px;
   }
 
   .go-back-pro-btn {
-     padding-bottom: 10px;
-     padding-top: 20px;
-     text-align: center;
+    padding-bottom: 10px;
+    padding-top: 20px;
+    text-align: center;
   }
 }
 
-@media (max-width:575px) {
+@media (max-width: 575px) {
   .smile-block .special-block {
-     width: 100%;
+    width: 100%;
   }
 
   .smile-block .special-block {
-     padding-right: 0;
+    padding-right: 0;
   }
 
   .desktop-hide {
-     display: block;
+    display: block;
   }
 }
 
-@media (max-width:480px) {
+@media (max-width: 480px) {
   .main-product-sec .product-container .left-content {
-     margin-top: -10px;
+    margin-top: -10px;
   }
 
   .smile-block .special-block {
-     padding-bottom: 30px;
+    padding-bottom: 30px;
   }
 
   .main-product-sec .product-form {
-     margin-bottom: 20px;
+    margin-bottom: 20px;
   }
 
   .product-quantity {
-     margin-right: 0;
-     margin-bottom: 0px;
+    margin-right: 0;
+    margin-bottom: 0px;
   }
 
   .product-quantity {
-     width: 100%;
+    width: 100%;
   }
-
 }
