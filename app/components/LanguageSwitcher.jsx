@@ -38,7 +38,8 @@ const LanguageSwitcher = () => {
       : 'https://cdn.shopify.com/s/files/1/0661/7595/9260/files/united-kingdom-flag-icon.svg?v=1721643633';
 
   return (
-    <div className="language-switcher">
+    // <div className="language-switcher">
+    <>
       <div className="dropdown-wrap" onClick={toggleDropdown}>
         <img src={flagSrc} alt="Selected Language" />
       </div>
@@ -70,7 +71,8 @@ const LanguageSwitcher = () => {
           </li>
         </ul>
       </div>
-    </div>
+    </>
+    // </div>
   );
 };
 
