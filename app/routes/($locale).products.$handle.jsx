@@ -81,8 +81,7 @@ function ProductMedia({media}) {
   const videoRef = useRef(null);
 
   useEffect(() => {
-    Fancybox.bind('[data-fancybox="main-image"]', {
-    });
+    Fancybox.bind('[data-fancybox="main-image"]', {});
 
     return () => {
       Fancybox.destroy();
@@ -170,12 +169,45 @@ export default function Product() {
 
     try {
       const parsedValue = JSON.parse(metafield);
-      return parsedValue.children
-        ?.map((child) =>
-          child.children?.map((grandChild) => grandChild.value).join(' '),
-        )
-        .join(' ');
+      function renderJSONToHTML(json) {
+        if (json.type === 'root') {
+          return json.children.map(renderJSONToHTML).join('');
+        }
+        console.log(json.value);
+        if (json.type === 'list') {
+          const tag = json.listType === 'unordered' ? 'ul' : 'ol';
+          const childrenHTML = json.children.map(renderJSONToHTML).join('');
+          return `<${tag}>${childrenHTML}</${tag}>`;
+        }
+
+        if (json.type === 'list-item') {
+          const childrenHTML = json.children.map(renderJSONToHTML).join('');
+          return `<li>${childrenHTML}</li>`;
+        }
+
+        if (json.type === 'text') {
+          return json.value;
+        }
+        if (json.type === 'paragraph') {
+          const childrenHTML = json.children.map(renderJSONToHTML).join('');
+          return `<p>${childrenHTML}</p>`;
+        }
+
+        if (json.bold === true) {
+          const textValue = json.value;
+          const boldText = json.bold
+            ? `<strong>${textValue}</strong>`
+            : textValue;
+          return boldText;
+        }
+
+        return '';
+      }
+
+      const renderedHTML = renderJSONToHTML(parsedValue);
+      return <div>{renderedHTML}</div>;
     } catch (error) {
+      console.error('Error parsing metafield:', error);
       return '';
     }
   };
@@ -263,7 +295,11 @@ export default function Product() {
                     data-aos-once="true"
                   >
                     <h2>Zubereitung</h2>
-                    <p>{preparationText}</p>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: preparationText.props.children,
+                      }}
+                    />
                   </div>
                 )}
 
@@ -275,7 +311,11 @@ export default function Product() {
                     data-aos-once="true"
                   >
                     <h2>Nährwerte</h2>
-                    <p>{nutritionalValuesText}</p>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: nutritionalValuesText.props.children,
+                      }}
+                    />
                   </div>
                 )}
               </div>
@@ -394,14 +434,22 @@ export default function Product() {
                     {ingredientsText && (
                       <div className="ingridiant-box">
                         <h2>Zutaten</h2>
-                        <p>{ingredientsText}</p>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: ingredientsText.props.children,
+                          }}
+                        />
                       </div>
                     )}
 
                     {additionalInformationText && (
                       <div className="ingridiant-box">
                         <h2>Weitere Informationen</h2>
-                        <p>{additionalInformationText}</p>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: additionalInformationText.props.children,
+                          }}
+                        />
                       </div>
                     )}
                   </div>
