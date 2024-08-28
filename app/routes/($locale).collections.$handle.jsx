@@ -190,7 +190,10 @@ export default function Collection() {
               <div className="c-right-wrap">
                 <div className="right-inner">
                   <div className="l-logo">
-                    <img src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/trusted_shop_seal_2_1.png?v=1718372000" />
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/png-clipart-trusted-shops-gmbh-e-commerce-logo-organization-certification-trust-no-one-text-trademark_copy.webp?v=1721658737"
+                      alt="certified logo"
+                    />
                   </div>
                   <div className="r-content">
                     <p>Zertifizierter online-shop</p>
