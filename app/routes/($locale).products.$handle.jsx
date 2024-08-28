@@ -173,7 +173,6 @@ export default function Product() {
         if (json.type === 'root') {
           return json.children.map(renderJSONToHTML).join('');
         }
-        console.log(json.value);
         if (json.type === 'list') {
           const tag = json.listType === 'unordered' ? 'ul' : 'ol';
           const childrenHTML = json.children.map(renderJSONToHTML).join('');

@@ -201,7 +201,7 @@ function ProductItem({product, loading}) {
   const titleParts = product.title.split('(');
   const titleMain = titleParts[0];
   const titleSub = titleParts[1] ? `(${titleParts[1]}` : '';
-
+  const collectionBadge = product.metafield?.value;
   const [path, setPath] = useState('');
   const location = useLocation();
   useEffect(() => {
@@ -225,14 +225,21 @@ function ProductItem({product, loading}) {
   const weight = variant.weight
     ? `Versandgewicht: ${variant.weight} kg`
     : 'Gewicht nicht verfügbar';
-
+  const referenceUnit = variant.unitPriceMeasurement?.referenceUnit;
   const unitPrice = variant.unitPrice ? (
     <div>
       <FormattedMoney money={variant.unitPrice} /> /{' '}
-      {variant.unitPriceMeasurement.referenceUnit}
+      {referenceUnit
+        ? referenceUnit.toLowerCase()
+        : 'referenceUnit is not defined'}
     </div>
   ) : null;
 
+  // console.log(
+  //   referenceUnit
+  //     ? referenceUnit.toLowerCase()
+  //     : 'referenceUnit is not defined',
+  // );
   const deliveryTime = product.tags.includes('app:expresshint')
     ? 'Lieferzeit: 1 Tag (*)'
     : 'Lieferzeit: 2-4 Tage (*)';
@@ -243,6 +250,11 @@ function ProductItem({product, loading}) {
       prefetch="intent"
       to={getPath()}
     >
+      {collectionBadge && (
+        <div className="collection-badge">
+          <p>{collectionBadge}</p>
+        </div>
+      )}
       <div className="pro-block">
         {product.featuredImage && (
           <Image
@@ -351,6 +363,9 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
           referenceValue
         }
       }
+    }
+    metafield(namespace: "custom", key: "collection_badge") {
+      value
     }
   }
 `;
