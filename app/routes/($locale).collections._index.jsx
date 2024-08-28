@@ -25,23 +25,23 @@ export default function Collections() {
   return (
     <div className="collections collection-list-page">
       <div className="container">
-      <h1>Collections</h1>
-      <Pagination connection={collections}>
-        {({nodes, isLoading, PreviousLink, NextLink}) => (
-          <div>
-            <PreviousLink className="yellow-btn bottom-spacing">
-              {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
-            </PreviousLink >
-            <CollectionsGrid collections={nodes} />
-            <div className="load-more">
-            <NextLink className="yellow-btn">
-              {isLoading ? 'Loading...' : <span>Load more ↓</span>}
-            </NextLink>
+        <h1>Collections</h1>
+        <Pagination connection={collections}>
+          {({nodes, isLoading, PreviousLink, NextLink}) => (
+            <div>
+              <PreviousLink className="yellow-btn bottom-spacing">
+                {isLoading ? 'Loading...' : <span>↑ Load previous</span>}
+              </PreviousLink>
+              <CollectionsGrid collections={nodes} />
+              <div className="load-more">
+                <NextLink className="yellow-btn">
+                  {isLoading ? 'Loading...' : <span>Load more ↓</span>}
+                </NextLink>
+              </div>
             </div>
-          </div>
-        )}
-      </Pagination>
-    </div>
+          )}
+        </Pagination>
+      </div>
     </div>
   );
 }
@@ -78,14 +78,14 @@ function CollectionItem({collection, index}) {
       prefetch="intent"
     >
       <div className="col-block">
-      {collection?.image && (
-        <Image
-          alt={collection.image.altText || collection.title}
-          aspectRatio="1/1"
-          data={collection.image}
-          loading={index < 3 ? 'eager' : undefined}
-        />
-      )}
+        {collection?.image && (
+          <Image
+            alt={collection.image.altText || collection.title}
+            aspectRatio="1/1"
+            data={collection.image}
+            loading={index < 3 ? 'eager' : undefined}
+          />
+        )}
       </div>
       <h5>{collection.title}</h5>
     </Link>

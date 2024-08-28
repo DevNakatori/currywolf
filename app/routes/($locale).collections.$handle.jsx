@@ -190,7 +190,10 @@ export default function Collection() {
               <div className="c-right-wrap">
                 <div className="right-inner">
                   <div className="l-logo">
-                    <img src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/trusted_shop_seal_2_1.png?v=1718372000" />
+                    <img
+                      src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/png-clipart-trusted-shops-gmbh-e-commerce-logo-organization-certification-trust-no-one-text-trademark_copy.webp?v=1721658737"
+                      alt="certified logo"
+                    />
                   </div>
                   <div className="r-content">
                     <p>Zertifizierter online-shop</p>
@@ -255,6 +258,7 @@ function CustomMenu({data}) {
  * @param {{products: ProductItemFragment[]}}
  */
 function ProductsGrid({products}) {
+  console.log(products.length);
   return (
     <>
       <div className="products-grid">
@@ -266,6 +270,7 @@ function ProductsGrid({products}) {
                   key={product.id}
                   product={product}
                   loading={index < 12 ? 'eager' : undefined}
+                  ProductsLength={products.length}
                 />
               );
             })}
@@ -282,7 +287,7 @@ function ProductsGrid({products}) {
  *   loading?: 'eager' | 'lazy';
  * }}
  */
-function ProductItem({product, loading}) {
+function ProductItem({product, loading, ProductsLength}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
   const collectionBadge = product.metafield?.value;
@@ -307,6 +312,7 @@ function ProductItem({product, loading}) {
   return (
     <Link
       className="product-item"
+      style={ProductsLength === 1 ? {width: '100%'} : {}}
       key={product.id}
       prefetch="intent"
       to={variantUrl}

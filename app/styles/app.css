@@ -1817,3 +1817,25 @@ img.footer-bg-img {
 .shopify-pc__banner__btn-manage-prefs {
   color: #fede03 !important;
 }
+.shopify-pc__prefs__dialog {
+  background-color: #9b2220 !important;
+  color: #fff !important;
+}
+.shopify-pc__prefs__dialog header h2,
+.shopify-pc__prefs__intro-main h3,
+.shopify-pc__prefs__option label {
+  color: #fede03 !important;
+}
+.shopify-pc__prefs__scrollable p {
+  color: #fff !important;
+}
+
+.shopify-pc__prefs__header-close svg path {
+  fill: #fff !important;
+}
+label[for='shopify-pc__prefs__preferences-input'] span svg path,
+label[for='shopify-pc__prefs__marketing-input'] span svg path,
+label[for='shopify-pc__prefs__analytics-input'] span svg path {
+  fill: #fede03 !important;
+}
+
