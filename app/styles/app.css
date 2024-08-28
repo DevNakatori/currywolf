@@ -1792,3 +1792,28 @@ img.footer-bg-img {
     margin-top: -15px !important;
   }
 }
+.shopify-pc__banner__dialog {
+  background-color: #9b2220 !important;
+}
+.shopify-pc__banner__body p {
+  color: #fff !important;
+}
+.shopify-pc__banner__body h2,
+.shopify-pc__banner__body a {
+  color: #fede03 !important;
+}
+.shopify-pc__banner__btn-accept {
+  background-color: #fede03 !important;
+  color: #9b2220 !important;
+  border: 2px solid #fede03 !important;
+  box-shadow: 0px 4px 4px 0px #00000040;
+}
+.shopify-pc__banner__btn-decline {
+  background-color: transparent !important;
+  border: 2px solid #fede03 !important;
+  box-shadow: 0px 4px 4px 0px #00000040;
+  color: #fede03 !important;
+}
+.shopify-pc__banner__btn-manage-prefs {
+  color: #fede03 !important;
+}
