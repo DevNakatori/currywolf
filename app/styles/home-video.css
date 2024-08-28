@@ -13,7 +13,7 @@ video#bgVideo {
   display: none !important;
   -webkit-appearance: none;
 }
-section:nth-child(1) {
+.index-wrapper section:nth-child(1) {
   height: 100vh;
 }
 .first-time-video-text h1 span:nth-child(1) {
@@ -103,7 +103,7 @@ a.yellow-btn {
   mix-blend-mode: multiply;
 }
 
-section {
+.index-wrapper section {
   position: relative;
   min-height: 100vh;
   display: grid;
