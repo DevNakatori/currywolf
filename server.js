@@ -132,11 +132,12 @@ function getLocaleFromRequest(request) {
   if (/^[A-Z]{2}-[A-Z]{2}$/i.test(firstPathPart)) {
     pathPrefix = '/' + firstPathPart;
     [language, country] = firstPathPart.split('-');
-  } else if (/^[A-Z]{2}$/i.test(firstPathPart)) {
-    language = firstPathPart;
-    country = language === 'EN' ? 'US' : 'DE'; // Default country for `en` is `US`
-    pathPrefix = '/' + firstPathPart;
   }
+  //  else if (/^[A-Z]{2}$/i.test(firstPathPart)) {
+  //   language = firstPathPart;
+  //   country = language === 'EN' ? 'US' : 'DE'; // Default country for `en` is `US`
+  //   pathPrefix = '/' + firstPathPart;
+  // }
 
   return {language, country, pathPrefix};
 }
