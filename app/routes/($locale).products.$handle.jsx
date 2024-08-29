@@ -13,7 +13,7 @@ import {
 } from '@shopify/hydrogen';
 import {getVariantUrl} from '~/lib/variants';
 import '../styles/product.css';
-import dhlLogo from '../assets/dhl.png';
+import dhlLogo from '../assets/logo_dhl-gogreen.svg';
 import certifiedBadge from '../assets/trustedlogo.png';
 import decorativegarland from '../assets/decorativegarland.png';
 import {Fancybox} from '@fancyapps/ui';
@@ -498,6 +498,14 @@ export default function Product() {
 }
 
 function ProductPrice({selectedVariant}) {
+  useEffect(() => {
+    const priceElement = document.querySelector('.p-price');
+    if (priceElement) {
+      const content = priceElement.textContent;
+      const spacedContent = content.replace(/([€$£])(\d)/, '$1 $2');
+      priceElement.textContent = spacedContent;
+    }
+  }, [selectedVariant]);
   return (
     <div className="product-price">
       {selectedVariant?.compareAtPrice ? (
@@ -513,13 +521,12 @@ function ProductPrice({selectedVariant}) {
         </>
       ) : (
         selectedVariant?.price && (
-          <Money className="p-price" data={selectedVariant?.price} />
+          <Money className="p-price" data={selectedVariant.price} />
         )
       )}
     </div>
   );
 }
-
 function ProductForm({product, selectedVariant, variants}) {
   const [quantity, setQuantity] = useState(1);
   const {publish, shop, cart, prevCart} = useAnalytics();
