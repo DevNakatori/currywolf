@@ -235,11 +235,6 @@ function ProductItem({product, loading}) {
     </div>
   ) : null;
 
-  // console.log(
-  //   referenceUnit
-  //     ? referenceUnit.toLowerCase()
-  //     : 'referenceUnit is not defined',
-  // );
   const deliveryTime = product.tags.includes('app:expresshint')
     ? 'Lieferzeit: 1 Tag (*)'
     : 'Lieferzeit: 2-4 Tage (*)';

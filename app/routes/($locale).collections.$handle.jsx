@@ -11,6 +11,7 @@ import {useVariantUrl} from '~/lib/variants';
 import decorativegarland from '../assets/decorativegarland.png';
 import '../styles/collection.css';
 import dhlLogo from '../assets/logo_dhl-gogreen.svg';
+import {useEffect} from 'react';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -309,6 +310,15 @@ function ProductItem({product, loading, ProductsLength}) {
   const deliveryTime = product.tags.includes('app:expresshint')
     ? 'Lieferzeit: 1 Tag (*)'
     : 'Lieferzeit: 2-4 Tage (*)';
+  useEffect(() => {
+    const priceElements = document.querySelectorAll('.c-price-range');
+    console.log(priceElements);
+    priceElements.forEach((priceElement) => {
+      const content = priceElement.textContent;
+      const spacedContent = content.replace(/([€$£])(\d)/, '$1 $2');
+      priceElement.textContent = spacedContent;
+    });
+  }, [product.priceRange.minVariantPrice]);
   return (
     <Link
       className="product-item"

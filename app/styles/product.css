@@ -159,9 +159,11 @@ main {
   list-style: disc;
   margin: revert;
   padding-left: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 .main-product-sec .product-container ul li {
-  padding-bottom: 15px;
+  padding-bottom: 3px;
   color: #fff;
 }
 .product-media {
@@ -430,7 +432,7 @@ main {
 }
 
 .right-bottom-content .cerified-box:nth-child(1) {
-  width: 100%;
+  width: 60%;
 }
 
 .right-bottom-content .cerified-box:nth-child(1) h4 {
@@ -446,7 +448,7 @@ main {
 
 .right-bottom-content .cerified-box:nth-child(1) img {
   width: 100px;
-  margin-top: 10px;
+  margin-top: 0px;
 }
 
 .desktop-hide {
@@ -458,7 +460,7 @@ main {
 }
 
 .right-bottom-content.mobile-hide {
-  display: inline-flex;
+  display: flex;
 }
 
 .go-back-pro-btn {
