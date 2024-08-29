@@ -10,6 +10,7 @@ import {
 import {useVariantUrl} from '~/lib/variants';
 import decorativegarland from '../assets/decorativegarland.png';
 import '../styles/collection.css';
+import dhlLogo from '../assets/logo_dhl-gogreen.svg';
 
 /**
  * @type {MetaFunction<typeof loader>}
@@ -201,7 +202,7 @@ export default function Collection() {
                 </div>
                 <div className="right-inner">
                   <div className="l-logo">
-                    <img src="https://cdn.shopify.com/s/files/1/0661/7595/9260/files/DHL-GoGreen-Logo_2_1.png?v=1718372000" />
+                    <img src={dhlLogo} />
                   </div>
                   <div className="r-content">
                     <p>Zertifizierter online-shop</p>
@@ -258,7 +259,6 @@ function CustomMenu({data}) {
  * @param {{products: ProductItemFragment[]}}
  */
 function ProductsGrid({products}) {
-  console.log(products.length);
   return (
     <>
       <div className="products-grid">
