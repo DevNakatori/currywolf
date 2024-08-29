@@ -267,15 +267,15 @@ nav.collection-menu.aos-init.aos-animate {
   max-width: 247px;
   margin: 0 auto 20px;
   border-top: 1px solid #fff;
-  margin-top: 20px !important;
-}
-
-.c-price-range > div {
-  margin-top: 15px;
+  margin-top: 5px !important;
+  padding-top: 10px;
   font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
   line-height: calc(20px + (20 - 20) * ((100vw - 320px) / (1920 - 320)));
 }
 
+.c-price-range > div {
+  margin-top: 15px;
+}
 .collection-badge {
   background: radial-gradient(
       63.11% 63.11% at 31.97% 19.67%,
