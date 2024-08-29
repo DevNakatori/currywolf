@@ -392,24 +392,6 @@ input[type='date']:invalid::-webkit-datetime-edit {
   .form-group {
   margin-bottom: 15px;
 }
-.form-group.star {
-  position: relative;
-}
-.form-group.star::after {
-  content: '*';
-  position: absolute;
-  width: 8px;
-  height: 8px;
-  top: 25%;
-  left: 53%;
-  transform: translate(-50%, -50%);
-  background-color: transparent;
-  border-radius: 50%;
-  color: #fede03;
-  font-size: 25px;
-  line-height: 15px;
-  text-align: center;
-}
 .star-content {
   position: relative;
 }
@@ -418,12 +400,12 @@ input[type='date']:invalid::-webkit-datetime-edit {
   position: absolute;
   width: 8px;
   height: 8px;
-  top: 25%;
+  top: 12%;
   left: -4px;
   transform: translate(-50%, -50%);
   background-color: transparent;
   border-radius: 50%;
-  color: #fede03;
+  color: #fff;
   font-size: 25px;
   line-height: 15px;
   text-align: center;
