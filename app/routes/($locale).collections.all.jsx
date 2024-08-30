@@ -308,6 +308,7 @@ function FormattedMoney({money}) {
   };
   const symbol = currencySymbols[money.currencyCode] || money.currencyCode;
   const formattedAmount = parseFloat(money.amount).toFixed(2);
+  console.log(formattedAmount);
   return (
     <span>
       {symbol} {formattedAmount}

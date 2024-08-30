@@ -57,7 +57,10 @@ main {
 .pro-wrap-c {
   padding-bottom: 5px;
 }
-
+.pro-wrap-c > div {
+  display: flex;
+  align-items: center;
+}
 .food-decorative-garland img {
   width: 100%;
 }
