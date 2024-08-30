@@ -311,6 +311,13 @@ main {
   text-decoration: none;
   background-color: transparent;
 }
+.main-product-sec .product-form button.yellow-btn:disabled {
+  cursor: not-allowed;
+}
+.main-product-sec .product-form button.yellow-btn:disabled:hover {
+  background-color: #fede03;
+  color: #9b2220;
+}
 
 .right-content .product-content .metafield h2 {
   font-size: calc(16px + (20 - 16) * ((100vw - 320px) / (1920 - 320)));
