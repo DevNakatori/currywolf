@@ -291,6 +291,7 @@ function ProductsGrid({products}) {
 function ProductItem({product, loading, ProductsLength}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
+  console.log(variantUrl);
   const collectionBadge = product.metafield?.value;
   const titleParts = product.title.split('(');
   const titleMain = titleParts[0];
@@ -302,7 +303,6 @@ function ProductItem({product, loading, ProductsLength}) {
     ? `Versandgewicht: ${variant.weight} kg`
     : 'Gewicht nicht verfügbar';
   // Adding the unit price
-  // console.log(variant.unitPrice);
   const referenceUnit = variant.unitPriceMeasurement?.referenceUnit;
   const unitPrice = variant.unitPrice ? (
     <div>
@@ -322,7 +322,6 @@ function ProductItem({product, loading, ProductsLength}) {
     : 'Lieferzeit: 2-4 Tage (*)';
   useEffect(() => {
     const priceElements = document.querySelectorAll('.c-price-range');
-    // console.log(priceElements);
     priceElements.forEach((priceElement) => {
       const content = priceElement.textContent;
       const spacedContent = content.replace(/([€$£])(\d)/, '$1 $2');
@@ -393,7 +392,7 @@ function ProductItem({product, loading, ProductsLength}) {
 function FormattedMoney({money}) {
   if (!money || !money.amount || !money.currencyCode) {
     console.error('Invalid money object:', money);
-    return null; // or return a fallback UI if preferred
+    return null;
   }
 
   const currencySymbols = {

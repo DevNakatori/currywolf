@@ -13,7 +13,7 @@ export function useVariantUrl(handle, selectedOptions) {
       handle,
       pathname,
       searchParams: new URLSearchParams(),
-      selectedOptions,
+      // selectedOptions,
     });
   }, [handle, selectedOptions, pathname]);
 }
@@ -30,7 +30,7 @@ export function getVariantUrl({
   handle,
   pathname,
   searchParams,
-  selectedOptions,
+  // selectedOptions,
 }) {
   const match = /(\/[a-zA-Z]{2}-[a-zA-Z]{2}\/)/g.exec(pathname);
   const isLocalePathname = match && match.length > 0;
@@ -39,9 +39,9 @@ export function getVariantUrl({
     ? `${match[0]}products/${handle}`
     : `/products/${handle}`;
 
-  selectedOptions.forEach((option) => {
-    searchParams.set(option.name, option.value);
-  });
+  // selectedOptions.forEach((option) => {
+  //   searchParams.set(option.name, option.value);
+  // });
 
   const searchString = searchParams.toString();
 
