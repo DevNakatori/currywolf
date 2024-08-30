@@ -159,7 +159,7 @@ main {
 }
 
 nav.collection-menu.aos-init.aos-animate {
-  margin-top: 90px;
+  margin-top: 130px;
   background: #fede03;
 }
 
@@ -477,6 +477,9 @@ nav.collection-menu.aos-init.aos-animate {
     padding: 73px 0px;
     padding: 0 20px;
   }
+  nav.collection-menu.aos-init.aos-animate {
+    margin-top: 100px;
+  }
 }
 
 @media (max-width: 1440px) {
@@ -535,7 +538,9 @@ nav.collection-menu.aos-init.aos-animate {
   .collection-banner {
     margin-top: 140px;
   }
-
+  nav.collection-menu.aos-init.aos-animate {
+    margin-top: 70px;
+  }
   .products-grid .product-g-wrap a {
     margin: 0 77px;
     width: calc(100% / 3 - 165px);
