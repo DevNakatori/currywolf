@@ -924,6 +924,13 @@ nav.collection-menu.aos-init.aos-animate {
     right: 30px;
   }
 }
+@media (max-width: 384px) {
+  .collection nav ul {
+    grid-gap: 2px;
+    flex-wrap: wrap;
+    padding: 0px 40px;
+  }
+}
 
 @media (max-width: 350px) {
   .products-grid .product-g-wrap a {
