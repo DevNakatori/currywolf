@@ -161,7 +161,7 @@ main {
 nav.collection-menu.aos-init.aos-animate {
   margin-top: 200px;
   background: #fede03;
-  z-index: 99;
+  z-index: 5;
 }
 
 .benifits h4 {
