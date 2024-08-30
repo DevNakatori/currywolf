@@ -475,13 +475,13 @@ nav.collection-menu.aos-init.aos-animate {
 }
 @media (max-width: 1900px) {
   .collection-banner {
-    margin-top: 40px;
+    margin-top: 80px;
   }
 }
 
 @media (max-width: 1700px) {
   .collection-banner {
-    margin-top: 70px;
+    margin-top: 120px;
   }
 }
 
@@ -508,7 +508,7 @@ nav.collection-menu.aos-init.aos-animate {
   }
 
   .collection-banner {
-    margin-top: 100px;
+    margin-top: 120px;
   }
 
   .products-grid .product-g-wrap h4 {
@@ -549,7 +549,7 @@ nav.collection-menu.aos-init.aos-animate {
 
 @media (max-width: 1199px) {
   .collection-banner {
-    margin-top: 140px;
+    margin-top: 100px;
   }
   nav.collection-menu.aos-init.aos-animate {
     margin-top: 70px;
