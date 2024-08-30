@@ -245,7 +245,7 @@ export default function App() {
         >
           <ScrollToTop />
           <AosInit />
-          {isProductOrCollectionPage && <Popup />}
+          {/* {isProductOrCollectionPage && <Popup />} */}
           <Layout {...data}>
             <Outlet />
           </Layout>
