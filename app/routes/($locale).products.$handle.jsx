@@ -559,9 +559,6 @@ function ProductForm({product, selectedVariant, variants}) {
               shop,
               url: window.location.href || '',
             });
-            setTimeout(() => {
-              window.location.href = window.location.href + '#cart-aside';
-            }, 1500);
           }}
           lines={
             selectedVariant
@@ -615,23 +612,38 @@ function ProductOptions({option}) {
 function AddToCartButton({analytics, children, disabled, lines, onClick}) {
   return (
     <CartForm route="/cart" inputs={{lines}} action={CartForm.ACTIONS.LinesAdd}>
-      {(fetcher) => (
-        <>
-          <input
-            name="analytics"
-            type="hidden"
-            value={JSON.stringify(analytics)}
-          />
-          <button
-            className="yellow-btn"
-            type="submit"
-            onClick={onClick}
-            disabled={disabled ?? fetcher.state !== 'idle'}
-          >
-            {children}
-          </button>
-        </>
-      )}
+      {(fetcher) => {
+        // Variable to hold the timeout ID
+        let timeoutId;
+
+        return (
+          <>
+            <input
+              name="analytics"
+              type="hidden"
+              value={JSON.stringify(analytics)}
+            />
+            <button
+              className="yellow-btn"
+              type="submit"
+              onClick={(event) => {
+                if (onClick) {
+                  onClick(event);
+                }
+                if (timeoutId) {
+                  clearTimeout(timeoutId);
+                }
+                timeoutId = setTimeout(() => {
+                  window.location.href = window.location.href + '#cart-aside';
+                }, 500);
+              }}
+              disabled={disabled ?? fetcher.state !== 'idle'}
+            >
+              {children}
+            </button>
+          </>
+        );
+      }}
     </CartForm>
   );
 }

@@ -103,7 +103,7 @@ function CartLineItem({layout, line}) {
           {selectedOptions.map((option) => (
             <li key={option.name}>
               <small>
-                {option.name}: {option.value}
+                {option.name}: {product.title}
               </small>
             </li>
           ))}
@@ -123,7 +123,7 @@ function CartCheckoutActions({checkoutUrl}) {
   return (
     <div>
       <a className="yellow-btn checkout" href={checkoutUrl} target="_self">
-        <p>Weiter zur Kasse</p>
+        <p>Weiter zu Kasse</p>
       </a>
       <br />
     </div>
@@ -143,9 +143,9 @@ export function CartSummary({cost, layout, children = null}) {
 
   return (
     <div aria-labelledby="cart-summary" className={className}>
-      <h4>Totals</h4>
+      <h4>Gesamtsumme</h4>
       <dl className="cart-subtotal">
-        <dt>Subtotal</dt>
+        <dt>Zwischensumme</dt>
         <dd>
           {cost?.subtotalAmount?.amount ? (
             <Money data={cost?.subtotalAmount} />
@@ -182,16 +182,16 @@ function CartLineRemoveButton({lineIds}) {
 function CartLineQuantity({line}) {
   if (!line || typeof line?.quantity === 'undefined') return null;
   const {id: lineId, quantity} = line;
-  const prevQuantity = Number(Math.max(0, quantity - 1).toFixed(0));
-  const nextQuantity = Number((quantity + 1).toFixed(0));
+  const prevQuantity = Math.max(0, quantity - 1);
+  const nextQuantity = quantity + 1;
 
   return (
     <div className="cart-line-quantity">
-      <small>Quantity: {quantity} &nbsp;&nbsp;</small>
+      <small>Anzahl: {quantity} &nbsp;&nbsp;</small>
       <CartLineUpdateButton lines={[{id: lineId, quantity: prevQuantity}]}>
         <button
           aria-label="Decrease quantity"
-          disabled={quantity <= 1}
+          disabled={quantity <= 0}
           name="decrease-quantity"
           value={prevQuantity}
         >
@@ -303,12 +303,12 @@ function CartDiscounts({discountCodes}) {
           <input
             type="text"
             name="discountCode"
-            placeholder="Discount code"
+            placeholder="Rabattcode"
             className="form-input"
           />
           &nbsp;
           <button className="yellow-btn" type="submit">
-            Apply
+            Anwenden
           </button>
         </div>
       </UpdateDiscountForm>

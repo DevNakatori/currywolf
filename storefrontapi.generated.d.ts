@@ -519,6 +519,16 @@ export type ProductItemFragment = Pick<
         unitPrice?: StorefrontAPI.Maybe<
           Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
         >;
+        unitPriceMeasurement?: StorefrontAPI.Maybe<
+          Pick<
+            StorefrontAPI.UnitPriceMeasurement,
+            | 'measuredType'
+            | 'quantityUnit'
+            | 'quantityValue'
+            | 'referenceUnit'
+            | 'referenceValue'
+          >
+        >;
       }
     >;
   };
@@ -578,6 +588,16 @@ export type CollectionQuery = {
                   >;
                   unitPrice?: StorefrontAPI.Maybe<
                     Pick<StorefrontAPI.MoneyV2, 'amount' | 'currencyCode'>
+                  >;
+                  unitPriceMeasurement?: StorefrontAPI.Maybe<
+                    Pick<
+                      StorefrontAPI.UnitPriceMeasurement,
+                      | 'measuredType'
+                      | 'quantityUnit'
+                      | 'quantityValue'
+                      | 'referenceUnit'
+                      | 'referenceValue'
+                    >
                   >;
                 }
               >;

@@ -27,7 +27,7 @@ export async function loader({request, params, context}) {
   const {handle} = params;
   const {storefront} = context;
   const paginationVariables = getPaginationVariables(request, {
-    pageBy: 12,
+    pageBy: 25,
   });
 
   if (!handle) {
@@ -270,7 +270,7 @@ function ProductsGrid({products}) {
                 <ProductItem
                   key={product.id}
                   product={product}
-                  loading={index < 12 ? 'eager' : undefined}
+                  loading={index < 25 ? 'eager' : undefined}
                   ProductsLength={products.length}
                 />
               );
@@ -291,6 +291,7 @@ function ProductsGrid({products}) {
 function ProductItem({product, loading, ProductsLength}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
+  console.log(variantUrl);
   const collectionBadge = product.metafield?.value;
   const titleParts = product.title.split('(');
   const titleMain = titleParts[0];
@@ -302,17 +303,25 @@ function ProductItem({product, loading, ProductsLength}) {
     ? `Versandgewicht: ${variant.weight} kg`
     : 'Gewicht nicht verfügbar';
   // Adding the unit price
+  const referenceUnit = variant.unitPriceMeasurement?.referenceUnit;
   const unitPrice = variant.unitPrice ? (
-    <div className="unit-price">
-      <Money data={variant.unitPrice} />
+    <div>
+      {variant.unitPrice && (
+        <>
+          <FormattedMoney money={variant.unitPrice} /> /{' '}
+        </>
+      )}
+      {referenceUnit
+        ? referenceUnit.toLowerCase()
+        : 'referenceUnit is not defined'}
     </div>
   ) : null;
+
   const deliveryTime = product.tags.includes('app:expresshint')
     ? 'Lieferzeit: 1 Tag (*)'
     : 'Lieferzeit: 2-4 Tage (*)';
   useEffect(() => {
     const priceElements = document.querySelectorAll('.c-price-range');
-    console.log(priceElements);
     priceElements.forEach((priceElement) => {
       const content = priceElement.textContent;
       const spacedContent = content.replace(/([€$£])(\d)/, '$1 $2');
@@ -350,7 +359,9 @@ function ProductItem({product, loading, ProductsLength}) {
       </h4>
       <span>{titleSub}</span>
       <div className="c-price-range">
-        <Money data={product.priceRange.minVariantPrice} />
+        {product.priceRange.minVariantPrice && (
+          <FormattedMoney money={product.priceRange.minVariantPrice} />
+        )}
       </div>
       <div className="c-all-wrap">
         <div className="tax-hint">
@@ -365,7 +376,7 @@ function ProductItem({product, loading, ProductsLength}) {
             <div className="c-weight">{weight}</div>
             <span>{deliveryTime}</span>
 
-            <div className="pro-wrap-c">{unitPrice}</div>
+            <div className="pro-wrap-c unit-price">{unitPrice}</div>
           </div>
           <div className="cart-btn">
             <span className="yellow-btn">In den Warenkorb</span>
@@ -373,6 +384,28 @@ function ProductItem({product, loading, ProductsLength}) {
         </div>
       </div>
     </Link>
+  );
+}
+/**
+ * @param {{money: {amount: string, currencyCode: string}}}
+ */
+function FormattedMoney({money}) {
+  if (!money || !money.amount || !money.currencyCode) {
+    console.error('Invalid money object:', money);
+    return null;
+  }
+
+  const currencySymbols = {
+    EUR: '€',
+    USD: '$',
+  };
+  const symbol = currencySymbols[money.currencyCode] || money.currencyCode;
+  const formattedAmount = parseFloat(money.amount).toFixed(2);
+
+  return (
+    <span>
+      {symbol} {formattedAmount}
+    </span>
   );
 }
 
@@ -414,6 +447,13 @@ const PRODUCT_ITEM_FRAGMENT = `#graphql
         weight
         unitPrice {
           ...MoneyProductItem
+        }
+          unitPriceMeasurement {
+          measuredType
+          quantityUnit
+          quantityValue
+          referenceUnit
+          referenceValue
         }
       }
     }
