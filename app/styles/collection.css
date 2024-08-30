@@ -159,7 +159,7 @@ main {
 }
 
 nav.collection-menu.aos-init.aos-animate {
-  margin-top: 130px;
+  margin-top: 200px;
   background: #fede03;
 }
 
@@ -460,6 +460,11 @@ nav.collection-menu.aos-init.aos-animate {
   }
 }
 
+@media (max-width: 1920px) {
+  nav.collection-menu.aos-init.aos-animate {
+    margin-top: 130px;
+  }
+}
 @media (max-width: 1900px) {
   .collection-banner {
     margin-top: 40px;
