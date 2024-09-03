@@ -176,17 +176,8 @@ export default function Collection() {
             data-aos-once="true"
           >
             <div className="left-l">
-              <h4>Worauf legen wir Wert?</h4>
-              <p>
-                Jeder Schritt bei der Herstellung unserer Currywurst im Glas
-                ist Handarbeit. Vom Braten, Schneiden, Abfüllen bis zum
-                Verschießen und Einwecken des Glases führen wir alle
-                Arbeitsschritte sorgfältig durch. Und wir legen Wert auf die
-                Herkunft unserer Zutaten. Das Produkt Original Berliner
-                Currywurst ist vom Markenpatentamt geschützt. Wir sind selbst
-                ein Berliner Familienunternehmen. Mit Leib und Seele
-                unterstützen wir andere Berliner Familienbetriebe.
-              </p>
+              <h4>{collection.title}</h4>
+              <p>{collection.description}</p>
             </div>
             <div className="right-l">
               <div className="c-right-wrap">
@@ -291,8 +282,17 @@ function ProductsGrid({products}) {
 function ProductItem({product, loading, ProductsLength}) {
   const variant = product.variants.nodes[0];
   const variantUrl = useVariantUrl(product.handle, variant.selectedOptions);
-  console.log(variantUrl);
+  function classifyValue(value) {
+    // Regular expression to match strings like "3+1", "8x", "48x", "4x"
+    const regexPattern = /^(\d+(\.\d+)?([x]|\+\d+)?)$/;
+    if (regexPattern.test(value)) {
+      return 'number';
+    } else {
+      return 'string';
+    }
+  }
   const collectionBadge = product.metafield?.value;
+  const valueType = classifyValue(collectionBadge);
   const titleParts = product.title.split('(');
   const titleMain = titleParts[0];
   const titleSub = titleParts[1] ? `(${titleParts[1]}` : '';
@@ -341,7 +341,9 @@ function ProductItem({product, loading, ProductsLength}) {
     >
       {collectionBadge && (
         <div className="collection-badge">
-          <p>{collectionBadge}</p>
+          <p className={valueType === 'string' ? 'string' : ''}>
+            {collectionBadge}
+          </p>
         </div>
       )}
       {product.featuredImage && (

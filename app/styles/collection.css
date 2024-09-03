@@ -306,6 +306,10 @@ nav.collection-menu.aos-init.aos-animate {
   font-family: 'BertholdBlock';
   color: #000;
 }
+.collection-badge p.string {
+  font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+  line-height: calc(20px + (14 - 20) * ((100vw - 320px) / (1920 - 320)));
+}
 
 .products-grid .product-g-wrap .cart-btn span {
   color: #9b2220;
@@ -873,6 +877,11 @@ nav.collection-menu.aos-init.aos-animate {
   .collection nav {
     top: 90px;
   }
+  .collection nav ul {
+    grid-gap: 2px;
+    flex-wrap: wrap;
+    padding: 0px 70px;
+  }
 
   .collection nav ul li a {
     font-size: 12px;
@@ -924,11 +933,9 @@ nav.collection-menu.aos-init.aos-animate {
     right: 30px;
   }
 }
-@media (max-width: 384px) {
+@media (max-width: 360px) {
   .collection nav ul {
-    grid-gap: 2px;
-    flex-wrap: wrap;
-    padding: 0px 40px;
+    padding: 0px 50px;
   }
 }
 
