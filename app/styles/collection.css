@@ -472,6 +472,11 @@ nav.collection-menu.aos-init.aos-animate {
     margin-top: 110px;
   }
 }
+@media (min-width: 2300px) {
+  .collection-badge p.string {
+    line-height: calc(25px + (14 - 20) * ((100vw - 320px) / (1920 - 320)));
+  }
+}
 @media (max-width: 1920px) {
   nav.collection-menu.aos-init.aos-animate {
     margin-top: 130px;
@@ -710,6 +715,10 @@ nav.collection-menu.aos-init.aos-animate {
   /* .collection-banner img {
        width: 292px;
     } */
+  .collection-badge p.string {
+    font-size: calc(10px + (10 - 14) * ((100vw - 320px) / (1920 - 320)));
+    line-height: calc(11px + (11 - 20) * ((100vw - 320px) / (1920 - 320)));
+  }
 
   .collection-banner {
     margin-top: 20px;
