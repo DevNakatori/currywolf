@@ -21,7 +21,7 @@ export const meta = ({data}) => {
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({params, context}) {
+export async function loader({params, request, context}) {
   const handle = params.handle || 'our-story';
   const canonicalUrl = request.url;
   const {page} = await context.storefront.query(PAGE_QUERY, {
