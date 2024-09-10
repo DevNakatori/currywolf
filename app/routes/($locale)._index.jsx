@@ -10,13 +10,18 @@ export const meta = ({data}) => {
   return [
     {title: `Curry Wolf | ${data?.page.title ?? ''}`},
     {name: 'description', content: data.page.seo.description},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
   ];
 };
 
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({params, context}) {
+export async function loader({request, params, context}) {
   const handle = params.handle || 'index';
 
   const {page} = await context.storefront.query(PAGE_QUERY, {
@@ -28,8 +33,9 @@ export async function loader({params, context}) {
   if (!page) {
     throw new Response('Not Found', {status: 404});
   }
+  const canonicalUrl = request.url;
 
-  return json({page});
+  return json({page, canonicalUrl});
 }
 
 export default function Page() {

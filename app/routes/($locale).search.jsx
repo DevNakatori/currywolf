@@ -8,7 +8,14 @@ import {SearchForm, SearchResults, NoSearchResults} from '~/components/Search';
  * @type {MetaFunction}
  */
 export const meta = () => {
-  return [{title: `Hydrogen | Search`}];
+  return [
+    {title: `Hydrogen | Search`},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
+  ];
 };
 
 /**
@@ -19,7 +26,7 @@ export async function loader({request, context}) {
   const searchParams = new URLSearchParams(url.search);
   const variables = getPaginationVariables(request, {pageBy: 8});
   const searchTerm = String(searchParams.get('q') || '');
-
+  const canonicalUrl = request.url;
   if (!searchTerm) {
     return {
       searchResults: {results: null, totalResults: 0},
@@ -48,6 +55,7 @@ export async function loader({request, context}) {
   };
 
   return defer({
+    canonicalUrl,
     searchTerm,
     searchResults,
   });

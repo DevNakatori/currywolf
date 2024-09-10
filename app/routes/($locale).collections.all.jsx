@@ -18,14 +18,22 @@ import {useEffect, useState} from 'react';
 /**
  * @type {MetaFunction<typeof loader>}
  */
-export const meta = () => {
-  return [{title: `Curry Wolf | All Products`}];
+export const meta = ({data}) => {
+  return [
+    {title: `Curry Wolf | All Products`},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
+  ];
 };
 
 /**
  * @param {LoaderFunctionArgs}
  */
 export async function loader({request, context}) {
+  const canonicalUrl = request.url;
   const {storefront} = context;
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 55,
@@ -43,6 +51,7 @@ export async function loader({request, context}) {
   });
 
   return json({
+    canonicalUrl,
     products,
     customMenu: await customMenuPromise,
   });

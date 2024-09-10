@@ -20,13 +20,20 @@ import {Fancybox} from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.product.title ?? ''}`}];
+  return [
+    {title: `Curry Wolf | ${data?.product.title ?? ''}`},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
+  ];
 };
 
 export async function loader({params, request, context}) {
   const {handle} = params;
   const {storefront} = context;
-
+  const canonicalUrl = request.url;
   const selectedOptions = getSelectedProductOptions(request).filter(
     (option) =>
       !option.name.startsWith('_sid') &&
@@ -69,6 +76,7 @@ export async function loader({params, request, context}) {
   });
 
   return defer({
+    canonicalUrl,
     product,
     variants,
   });

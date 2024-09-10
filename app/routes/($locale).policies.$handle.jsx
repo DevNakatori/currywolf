@@ -1,21 +1,29 @@
-import React, { useEffect } from 'react';
-import { json } from '@shopify/remix-oxygen';
-import { Link, useLoaderData } from '@remix-run/react';
+import React, {useEffect} from 'react';
+import {json} from '@shopify/remix-oxygen';
+import {Link, useLoaderData} from '@remix-run/react';
 import '../styles/policies.css';
 
 /**
  * @type {MetaFunction<typeof loader>}
  */
-export const meta = ({ data }) => {
-  return [{ title: `Curry Wolf | ${data?.policy.title ?? ''}` }];
+export const meta = ({data}) => {
+  return [
+    {title: `Curry Wolf | ${data?.policy.title ?? ''}`},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
+  ];
 };
 
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({ params, context }) {
+export async function loader({params, request, context}) {
+  const canonicalUrl = request.url;
   if (!params.handle) {
-    throw new Response('No handle was passed in', { status: 404 });
+    throw new Response('No handle was passed in', {status: 404});
   }
 
   const policyName = params.handle.replace(/-([a-z])/g, (_, m1) =>
@@ -36,7 +44,7 @@ export async function loader({ params, context }) {
   const policy = data.shop?.[policyName];
 
   if (!policy) {
-    throw new Response('Could not find the policy', { status: 404 });
+    throw new Response('Could not find the policy', {status: 404});
   }
 
   // Replace the policy title with the German name
@@ -57,12 +65,12 @@ export async function loader({ params, context }) {
       break;
   }
 
-  return json({ policy });
+  return json({policy, canonicalUrl});
 }
 
 export default function Policy() {
   /** @type {LoaderReturnData} */
-  const { policy } = useLoaderData();
+  const {policy} = useLoaderData();
 
   useEffect(() => {
     if (policy.handle === 'privacyPolicy') {
@@ -106,12 +114,14 @@ export default function Policy() {
     <div className="policy">
       <div className="container">
         <div>
-          <Link className="yellow-border-btn" to="/policies">← Zu allen Richtlinien</Link>
+          <Link className="yellow-border-btn" to="/policies">
+            ← Zu allen Richtlinien
+          </Link>
         </div>
         <div className="top-title">
           <h1>{policy.title}</h1>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: policy.body }} />
+        <div dangerouslySetInnerHTML={{__html: policy.body}} />
       </div>
     </div>
   );

@@ -6,16 +6,27 @@ import '../styles/collection-list.css';
  * @param {LoaderFunctionArgs}
  */
 
+export const meta = ({data}) => {
+  return [
+    {title: `Curry Wolf | ${data?.page?.title ?? 'Collections'}`},
+    // {name: 'description', content: data.page.seo.description},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
+  ];
+};
 export async function loader({context, request}) {
   const paginationVariables = getPaginationVariables(request, {
     pageBy: 9,
   });
-
+  const canonicalUrl = request.url;
   const {collections} = await context.storefront.query(COLLECTIONS_QUERY, {
     variables: paginationVariables,
   });
 
-  return json({collections});
+  return json({collections, canonicalUrl});
 }
 
 export default function Collections() {
