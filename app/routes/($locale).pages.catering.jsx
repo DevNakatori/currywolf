@@ -8,12 +8,12 @@ import '../styles/catering-page.css';
  */
 export const meta = ({data}) => {
   return [
-    {title: `Curry Wolf | ${data?.page.title ?? ''}`},
-    {name: 'description', content: data.page.seo.description},
+    {title: `Curry Wolf | ${data?.page?.title ?? ''}`},
+    {name: 'description', content: data?.page?.seo?.description || ''},
     {
       tagName: 'link',
       rel: 'canonical',
-      href: data.canonicalUrl,
+      href: data?.canonicalUrl || '',
     },
   ];
 };
@@ -43,54 +43,54 @@ export default function Page() {
 
   useEffect(() => {
     if (window.innerWidth < 768) {
-      setTimeout(function () {
-        const sliderContainer = document.querySelector('.ref-wrap');
-        const slides = document.querySelectorAll('.ref-box');
-        let currentIndex = 0;
-        let slidesToShow = 1;
+      const sliderContainer = document.querySelector('.ref-wrap');
+      const slides = document.querySelectorAll('.ref-box');
+      let currentIndex = 0;
+      let slidesToShow = 1;
+      let autoplayInterval;
 
-        function updateSlider() {
-          if (window.innerWidth < 768) {
-            slidesToShow = 2;
-          } else {
-            slidesToShow = 1;
-          }
-
-          const width = sliderContainer.clientWidth / slidesToShow;
-          slides.forEach((slide) => {
-            slide.style.minWidth = `${width}px`;
-          });
-          sliderContainer.style.transform = `translateX(${
-            -width * currentIndex
-          }px)`;
-        }
-
-        function nextSlide() {
-          if (currentIndex < slides.length - slidesToShow) {
-            currentIndex += 1;
-          } else {
-            currentIndex = 0;
-          }
-          updateSlider();
-        }
-
-        function startAutoplay() {
-          setInterval(nextSlide, 3000);
-        }
-
-        function resetAutoplay() {
-          clearInterval(autoplayInterval);
-          startAutoplay();
-        }
-
-        window.addEventListener('resize', function () {
-          updateSlider();
-          currentIndex = 0;
+      function updateSlider() {
+        slidesToShow = window.innerWidth < 768 ? 2 : 1;
+        const width = sliderContainer.clientWidth / slidesToShow;
+        slides.forEach((slide) => {
+          slide.style.minWidth = `${width}px`;
         });
+        sliderContainer.style.transform = `translateX(${
+          -width * currentIndex
+        }px)`;
+      }
 
+      function nextSlide() {
+        if (currentIndex < slides.length - slidesToShow) {
+          currentIndex += 1;
+        } else {
+          currentIndex = 0;
+        }
         updateSlider();
+      }
+
+      function startAutoplay() {
+        autoplayInterval = setInterval(nextSlide, 3000);
+      }
+
+      function resetAutoplay() {
+        clearInterval(autoplayInterval);
         startAutoplay();
-      }, 2000);
+      }
+
+      window.addEventListener('resize', () => {
+        updateSlider();
+        currentIndex = 0;
+      });
+
+      updateSlider();
+      startAutoplay();
+
+      // Cleanup on component unmount
+      return () => {
+        clearInterval(autoplayInterval);
+        window.removeEventListener('resize', updateSlider);
+      };
     }
   }, []);
 
