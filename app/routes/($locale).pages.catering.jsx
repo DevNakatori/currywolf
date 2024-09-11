@@ -42,57 +42,38 @@ export default function Page() {
   const {page} = useLoaderData();
 
   useEffect(() => {
-    if (window.innerWidth < 768) {
-      const sliderContainer = document.querySelector('.ref-wrap');
-      const slides = document.querySelectorAll('.ref-box');
-      let currentIndex = 0;
-      let slidesToShow = 1;
-      let autoplayInterval;
-
-      function updateSlider() {
-        slidesToShow = window.innerWidth < 768 ? 2 : 1;
-        const width = sliderContainer.clientWidth / slidesToShow;
-        slides.forEach((slide) => {
-          slide.style.minWidth = `${width}px`;
-        });
-        sliderContainer.style.transform = `translateX(${
-          -width * currentIndex
-        }px)`;
+    function setEqualHeight() {
+      const boxes = document.querySelectorAll('.same-height');
+      if (boxes.length === 0) {
+        return;
       }
 
-      function nextSlide() {
-        if (currentIndex < slides.length - slidesToShow) {
-          currentIndex += 1;
-        } else {
-          currentIndex = 0;
-        }
-        updateSlider();
-      }
+      let maxHeight = 0;
 
-      function startAutoplay() {
-        autoplayInterval = setInterval(nextSlide, 3000);
-      }
-
-      function resetAutoplay() {
-        clearInterval(autoplayInterval);
-        startAutoplay();
-      }
-
-      window.addEventListener('resize', () => {
-        updateSlider();
-        currentIndex = 0;
+      boxes.forEach((box) => {
+        box.style.minHeight = '100px';
+        box.style.height = 'auto';
       });
 
-      updateSlider();
-      startAutoplay();
+      boxes.forEach((box) => {
+        const boxHeight = box.clientHeight;
+        if (boxHeight > maxHeight) {
+          maxHeight = boxHeight;
+        }
+      });
 
-      // Cleanup on component unmount
-      return () => {
-        clearInterval(autoplayInterval);
-        window.removeEventListener('resize', updateSlider);
-      };
+      boxes.forEach((box) => {
+        box.style.height = `${maxHeight}px`;
+      });
     }
-  }, []);
+
+    setEqualHeight();
+    window.addEventListener('resize', setEqualHeight);
+
+    return () => {
+      window.removeEventListener('resize', setEqualHeight);
+    };
+  }, [location]);
 
   return (
     <div className="page catering-main">
