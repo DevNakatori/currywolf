@@ -18,11 +18,11 @@
   background-color: transparent;
 }
 
-.tab input:checked~.tab__content p {
+.tab input:checked ~ .tab__content p {
   font-weight: bold;
 }
 
-.tab input:checked~label {
+.tab input:checked ~ label {
   font-weight: bold;
 }
 
@@ -38,7 +38,7 @@
   transition: all 0.35s;
 }
 
-.tab input:checked~.tab__content {
+.tab input:checked ~ .tab__content {
   max-height: 10rem;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .tab {
-  border-bottom: 1px solid #FFFFFF;
+  border-bottom: 1px solid #ffffff;
 }
 
 .tab:last-child {
@@ -77,15 +77,16 @@
 }
 
 .tab__label::after {
-  content: "";
+  content: '';
   width: 27px;
   height: 14px;
   text-align: center;
   transition: all 0.35s;
-  background: url('https://cdn.shopify.com/s/files/1/0661/7595/9260/files/down-arrow.svg?v=1719579104') no-repeat center / contain;
+  background: url('https://cdn.shopify.com/s/files/1/0661/7595/9260/files/down-arrow.svg?v=1719579104')
+    no-repeat center / contain;
 }
 
-.tab input:checked+.tab__label::after {
+.tab input:checked + .tab__label::after {
   transform: rotate(180deg);
 }
 
@@ -117,7 +118,7 @@ div#faq {
 }
 
 .catering-inner {
-  background: linear-gradient(180deg, #D02523 0%, #9B2220 44.72%);
+  background: linear-gradient(180deg, #d02523 0%, #9b2220 44.72%);
   overflow: hidden;
 }
 
@@ -203,7 +204,6 @@ div#faq {
 .c-brand-content p {
   font-family: 'Gotham-Book';
   font-weight: 400;
-
 }
 
 .c-brand-content {
@@ -250,7 +250,7 @@ div#faq {
 }
 
 .img-one:before {
-  content: "";
+  content: '';
   position: absolute;
   top: -50px;
   background: url(/app/assets/pushpin-2.svg) no-repeat center / contain;
@@ -343,6 +343,7 @@ div#faq {
 
 .ref-box p {
   font-weight: 400;
+  height: 100px;
 }
 
 .ref-title h4 {
@@ -351,7 +352,7 @@ div#faq {
   font-family: 'BertholdBlock';
   color: #fff;
   margin-bottom: 0;
-  color: #FEDE03;
+  color: #fede03;
 }
 
 .ref-title {
@@ -546,449 +547,449 @@ div#faq {
   z-index: 1;
 }
 
-@media (max-width:1440px) {
+@media (max-width: 1440px) {
   .logo-box img {
-     width: 70%;
+    width: 70%;
   }
 
   .logo-box:nth-child(1) img {
-     width: auto;
+    width: auto;
   }
 
   .curywolf-catering-box {
-     padding-bottom: 190px;
+    padding-bottom: 190px;
   }
 
   .inner-wolf-bestell {
-     margin-bottom: 70px;
+    margin-bottom: 70px;
   }
 
   .f-btn-wrap {
-     padding: 60px 0 50px 0;
+    padding: 60px 0 50px 0;
   }
 }
 
-@media (max-width:1200px) {
-
+@media (max-width: 1200px) {
   .brandenburg .brand-left {
-     padding-right: 40px;
+    padding-right: 40px;
   }
 
   .inner-white-box {
-     padding: 10px;
+    padding: 10px;
   }
 
   .brandenburg .img-big-wrap {
-     width: 80%;
+    width: 80%;
   }
 
   .curywolf-catering-box {
-     padding-bottom: 170px;
+    padding-bottom: 170px;
   }
 
   .curywolf-catering-box .img-big-wrap:nth-child(2) .img-one:before,
   .curywolf-catering-box .img-big-wrap:nth-child(3) .img-one:before,
   .curywolf-catering-box .img-big-wrap:nth-child(5) .img-one:before {
-     width: 45px;
+    width: 45px;
   }
 }
 
-@media (max-width:1024px) {
+@media (max-width: 1024px) {
   .inner-wolf-bestell {
-     padding-bottom: 50px;
-     margin-bottom: 50px;
+    padding-bottom: 50px;
+    margin-bottom: 50px;
   }
 
   .inner-wolf-bestell h3 {
-     margin-bottom: 30px;
+    margin-bottom: 30px;
   }
 
   .brand-left h2 {
-     margin-bottom: 30px;
+    margin-bottom: 30px;
   }
 
   .c-brand-content {
-     padding: 88px 0 50px;
+    padding: 88px 0 50px;
   }
 
   .brandenburg {
-     padding-bottom: 70px;
+    padding-bottom: 70px;
   }
 
   .reference {
-     padding: 70px 0;
+    padding: 70px 0;
   }
 
   .logo-box {
-     width: calc(100% / 2);
+    width: calc(100% / 2);
   }
 
   .logo-box img {
-     width: auto;
+    width: auto;
   }
 
   .c-brand-content {
-     padding: 50px 0 50px;
+    padding: 50px 0 50px;
   }
 
   .wolf-logo {
-     padding: 70px 0;
+    padding: 70px 0;
   }
-
 }
 
-@media (max-width:767px) {
+@media (max-width: 767px) {
   .f-btn-wrap {
-     padding: 40px 0 40px 0;
+    padding: 40px 0 40px 0;
   }
 
   .inner-wolf-bestell .left-content {
-     max-width: initial;
+    max-width: initial;
   }
 
   .inner-wolf-bestell .left-content h1 {
-     font-family: 'RubikOne-Regular';
+    font-family: 'RubikOne-Regular';
   }
 
   .inner-wolf-bestell h3 {
-     font-family: 'Neue-Haas-Grotesk-Display-Pro';
+    font-family: 'Neue-Haas-Grotesk-Display-Pro';
   }
 
   .brandenburg {
-     flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   .brandenburg .brand-left {
-     width: 100%;
-     padding-right: 0;
+    width: 100%;
+    padding-right: 0;
   }
 
   .c-brand-content {
-     padding: 30px 0 0;
+    padding: 30px 0 0;
   }
 
   .c-brand-content p:nth-child(even) {
-     padding-bottom: 30px;
+    padding-bottom: 30px;
   }
 
   .brandenburg .brand-right {
-     width: 100%;
+    width: 100%;
   }
 
   .c-brand-content .b-btn-wrap {
-     margin-bottom: 30px;
+    margin-bottom: 30px;
   }
 
   .ref-wrap {
-     flex-wrap: wrap;
-     gap: 25px;
+    flex-wrap: wrap;
+    gap: 25px;
   }
 
   .ref-title {
-     margin-top: 15px;
+    margin-top: 15px;
   }
 
   .wolf-logo {
-     padding: 40px 0 0;
+    padding: 40px 0 0;
   }
 
   .faq-sec {
-     padding: 50px 0;
+    padding: 50px 0;
   }
 
   .ref-box {
-     max-width: initial;
+    max-width: initial;
   }
 
   .reference {
-     padding: 50px 0;
+    padding: 50px 0;
   }
 
   .wolf-logo {
-     flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   .wolf-logo .w-left-content,
   .wolf-logo .w-right-logo {
-     width: 100%;
-     margin-bottom: 20px;
-     /* row-gap: 30px; */
+    width: 100%;
+    margin-bottom: 20px;
+    /* row-gap: 30px; */
   }
 
   .inner-wolf-bestell .right-logo img {
-     width: 150px;
+    width: 150px;
   }
 
   .wolf-logo .w-left-content {
-     margin-bottom: 25px;
-     text-align: center;
-     border-bottom: 1px solid #fff;
-     padding-bottom: 25px;
+    margin-bottom: 25px;
+    text-align: center;
+    border-bottom: 1px solid #fff;
+    padding-bottom: 25px;
   }
 
   .brandenburg .brand-left .b-btn-wrap {
-     margin-bottom: 30px;
+    margin-bottom: 30px;
   }
 
   .logo-box {
-     width: calc(100% / 5);
-     text-align: center;
-     text-align: center;
-     margin-bottom: 0;
-     display: flex;
-     align-items: center;
-     justify-content: center;
+    width: calc(100% / 5);
+    text-align: center;
+    text-align: center;
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .logo-box img {
-     width: 80%;
+    width: 80%;
   }
 
   .inner-wolf-bestell {
-     justify-content: center;
+    justify-content: center;
   }
 
   .logo-box:nth-child(1) img {
-     width: 50%;
+    width: 50%;
   }
 
   .wolf-logo .w-left-content h3 {
-     font-family: 'RubikOne-Regular';
-     margin: 0 0 10px 0;
+    font-family: 'RubikOne-Regular';
+    margin: 0 0 10px 0;
   }
 
   .wolf-logo .w-left-content p {
-     font-family: 'Neue-Haas-Grotesk-Display-Pro';
+    font-family: 'Neue-Haas-Grotesk-Display-Pro';
   }
 
   .yellow-btn {
-     border-radius: 5px;
+    border-radius: 5px;
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(1) a {
-     transform: translate(83%, 102%);
-     z-index: 99;
+    transform: translate(83%, 102%);
+    z-index: 99;
   }
 
   .catering-inner .img-big-wrap:nth-child(1) .img-one {
-     transform: rotate(6deg);
+    transform: rotate(6deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(2) .img-one {
-     transform: rotate(6deg);
+    transform: rotate(6deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(2) a {
-     transform: translate(6%, -11%);
+    transform: translate(6%, -11%);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(3) a {
-     transform: translate(-8%, -108%);
-     z-index: 0;
+    transform: translate(-8%, -108%);
+    z-index: 0;
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(3) .img-one {
-     transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(4) a {
-     display: none;
+    display: none;
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(5) .img-one {
-     transform: rotate(-12deg);
-
+    transform: rotate(-12deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(5) a {
-     transform: translate(-12%, -100%);
+    transform: translate(-12%, -100%);
   }
 
-  .catering-inner .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(6) a {
-     transform: translate(-129%, -128%);
+  .catering-inner
+    .catering-inner
+    .curywolf-catering-box
+    .img-big-wrap:nth-child(6)
+    a {
+    transform: translate(-129%, -128%);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(6) .img-one {
-     transform: rotate(-13deg);
+    transform: rotate(-13deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(7) a {
-     transform: translate(-102%, -18%);
+    transform: translate(-102%, -18%);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(7) .img-one {
-     transform: rotate(-10deg);
-     width: 190px;
+    transform: rotate(-10deg);
+    width: 190px;
   }
 
   .curywolf-catering-box .img-big-wrap:nth-child(2) .img-one:before,
   .curywolf-catering-box .img-big-wrap:nth-child(3) .img-one:before,
   .curywolf-catering-box .img-big-wrap:nth-child(5) .img-one:before {
-     width: 45px;
+    width: 45px;
   }
 
   .img-big-wrap {
-     width: calc(100% / 2);
+    width: calc(100% / 2);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(1) a {
-     transform: translate(103%, 96%);
-     z-index: 99;
+    transform: translate(103%, 96%);
+    z-index: 99;
   }
 
   .img-big-wrap:nth-child(1) .img-one {
-     transform: rotate(6deg);
+    transform: rotate(6deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(2) .img-one {
-     transform: rotate(6deg);
+    transform: rotate(6deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(3) .img-one {
-     transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(4) a {
-     display: none;
+    display: none;
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(5) .img-one {
-     transform: rotate(-10deg);
-
+    transform: rotate(-10deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(6) a {
-     transform: translate(-125%, -129%);
+    transform: translate(-125%, -129%);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(6) .img-one {
-     transform: rotate(-13deg);
+    transform: rotate(-13deg);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(7) a {
-     transform: translate(-7%, -12%);
+    transform: translate(-7%, -12%);
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(7) .img-one {
-     transform: rotate(-10deg);
+    transform: rotate(-10deg);
   }
 
   .img-one {
-     padding-bottom: 9px;
+    padding-bottom: 9px;
   }
 
   .catering-inner .container {
-     position: relative;
+    position: relative;
   }
 
   .img-one .inner-content p {
-     font-family: 'BertholdBlock';
-     font-weight: 400;
+    font-family: 'BertholdBlock';
+    font-weight: 400;
   }
 
   .curywolf-catering-box {
-     max-width: 92%;
-     margin: 0 auto;
-     padding-bottom: 0px;
-     border-bottom: 0;
+    max-width: 92%;
+    margin: 0 auto;
+    padding-bottom: 0px;
+    border-bottom: 0;
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap {
-     width: calc(100% / 2);
+    width: calc(100% / 2);
   }
 
   .curywolf-catering-box .img-big-wrap:nth-child(2) .img-one:before,
   .curywolf-catering-box .img-big-wrap:nth-child(3) .img-one:before,
   .curywolf-catering-box .img-big-wrap:nth-child(5) .img-one:before {
-     width: 45px;
+    width: 45px;
   }
 
   .img-one:before {
-     width: 45px;
+    width: 45px;
   }
 
   .catering-inner .curywolf-catering-box .img-one {
-     padding-bottom: 10px;
+    padding-bottom: 10px;
   }
 
   .catering-inner {
-     overflow: hidden;
+    overflow: hidden;
   }
 
   .ref-wrap {
-     display: flex;
-     transition: transform 0.3s ease;
-     flex-wrap: nowrap;
+    display: flex;
+    transition: transform 0.3s ease;
+    flex-wrap: nowrap;
   }
 
   .ref-box {
-     min-width: 50%;
-     box-sizing: border-box;
-     padding: 10px;
-     margin: 10px;
-     background-color: #FF3E34;
-     border-radius: 10px;
-     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 50%;
+    box-sizing: border-box;
+    padding: 10px;
+    margin: 10px;
+    background-color: #ff3e34;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 
   .b-btn-wrap {
-     margin-top: 30px;
+    margin-top: 30px;
   }
 
   .brandenburg .img-big-wrap {
-     width: 100%;
+    width: 100%;
   }
 
   .wolf-logo .w-left-content svg {
-     width: 26px;
-     height: 26px;
+    width: 26px;
+    height: 26px;
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(7) {
-     position: absolute;
-     bottom: 0px;
+    position: absolute;
+    bottom: 0px;
   }
 
   .reference h3 {
-     text-align: center;
+    text-align: center;
   }
 
   .curywolf-catering-box {
-     margin-bottom: -290px;
+    margin-bottom: -290px;
   }
 }
 
-@media (max-width:575px) {
+@media (max-width: 575px) {
   .curywolf-catering-box {
-     margin-bottom: -230px;
+    margin-bottom: -230px;
   }
 
   .inner-wolf-bestell {
-     flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   .left-content {
-     text-align: center;
+    text-align: center;
   }
 
   .inner-wolf-bestell {
-     padding-bottom: 30px;
-     margin-bottom: 50px;
+    padding-bottom: 30px;
+    margin-bottom: 50px;
   }
 
   .inner-wolf-bestell h3 {
-     margin: 0 0 20px 0;
+    margin: 0 0 20px 0;
   }
 
   .catering-inner .curywolf-catering-box .img-big-wrap:nth-child(5) a {
-     transform: translate(-12%, -100%);
+    transform: translate(-12%, -100%);
   }
 
   .f-btn-wrap {
-     flex-wrap: wrap;
+    flex-wrap: wrap;
   }
 
   .f-btn-wrap .faq-btn:first-child {
-     margin-bottom: 15px;
+    margin-bottom: 15px;
   }
 }

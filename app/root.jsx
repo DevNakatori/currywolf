@@ -167,11 +167,8 @@ export default function App() {
 
     setEqualHeight();
     window.addEventListener('resize', setEqualHeight);
-    window.addEventListener('load', setEqualHeight);
-
     return () => {
       window.removeEventListener('resize', setEqualHeight);
-      window.removeEventListener('load', setEqualHeight);
     };
   }, [location]);
 
