@@ -20,8 +20,10 @@ import {Fancybox} from '@fancyapps/ui';
 import '@fancyapps/ui/dist/fancybox/fancybox.css';
 
 export const meta = ({data}) => {
+  console.log(data);
   return [
     {title: `Curry Wolf | ${data?.product.title ?? ''}`},
+    {name: 'description', content: data?.product?.seo?.description || ''},
     {
       tagName: 'link',
       rel: 'canonical',
@@ -739,6 +741,10 @@ const PRODUCT_FRAGMENT = `#graphql
     handle
     descriptionHtml
     description
+    seo {
+      description
+      title
+    }
     metafields(identifiers: [{namespace: "custom", key: "nutritional_values"}, {namespace: "custom", key: "additional_information"}, {namespace: "custom", key: "ingredients"}, {namespace: "custom", key: "preparation"}]) {
       namespace
       key
@@ -755,10 +761,6 @@ const PRODUCT_FRAGMENT = `#graphql
       nodes {
         ...ProductVariant
       }
-    }
-    seo {
-      description
-      title
     }
     media(first: 10) {
       nodes {

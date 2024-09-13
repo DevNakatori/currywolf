@@ -17,7 +17,6 @@ import {useEffect} from 'react';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  console.log(data);
   return [
     {title: `Curry Wolf | ${data?.collection.seo.title ?? ''}`},
     {name: 'description', content: `${data?.collection.seo.description ?? ''}`},
