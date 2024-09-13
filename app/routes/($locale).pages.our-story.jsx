@@ -1,37 +1,44 @@
-import React, { useEffect } from 'react';
-import { json } from '@shopify/remix-oxygen';
-import { useLoaderData } from '@remix-run/react';
+import React, {useEffect} from 'react';
+import {json} from '@shopify/remix-oxygen';
+import {useLoaderData} from '@remix-run/react';
 import '../styles/our-story.css';
 
 /**
  * @type {MetaFunction<typeof loader>}
  */
-export const meta = ({ data }) => {
-  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`},
-    {name :"description","content": data.page.seo.description }
+export const meta = ({data}) => {
+  return [
+    {title: `Curry Wolf | ${data?.page.title ?? ''}`},
+    {name: 'description', content: data.page.seo.description},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
   ];
 };
 
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({ params, context }) {
+export async function loader({params, request, context}) {
   const handle = params.handle || 'our-story';
-  const { page } = await context.storefront.query(PAGE_QUERY, {
+  const canonicalUrl = request.url;
+  const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
       handle: handle,
     },
   });
 
   if (!page) {
-    throw new Response('Not Found', { status: 404 });
+    throw new Response('Not Found', {status: 404});
   }
 
-  return json({ page });
+  return json({page, canonicalUrl});
 }
 
 export default function Page() {
-  const { page } = useLoaderData();
+  const {page} = useLoaderData();
 
   useEffect(() => {
     if (document.querySelectorAll('.path-vert').length > 0) {
@@ -43,7 +50,10 @@ export default function Page() {
       const updateDashOffset = () => {
         const scrollPosition = window.scrollY;
         const maxScroll = document.body.scrollHeight - window.innerHeight;
-        const dashOffset = Math.max(0, pathLength - (scrollPosition / maxScroll * pathLength));
+        const dashOffset = Math.max(
+          0,
+          pathLength - (scrollPosition / maxScroll) * pathLength,
+        );
         path.style.strokeDashoffset = dashOffset;
       };
 
@@ -79,7 +89,10 @@ export default function Page() {
       path.getBoundingClientRect();
 
       const handleScroll = () => {
-        const scrollPercentage = (document.documentElement.scrollTop + document.body.scrollTop) / (document.documentElement.scrollHeight - document.documentElement.clientHeight);
+        const scrollPercentage =
+          (document.documentElement.scrollTop + document.body.scrollTop) /
+          (document.documentElement.scrollHeight -
+            document.documentElement.clientHeight);
         const drawLength = pathLength * scrollPercentage;
         path.style.strokeDashoffset = pathLength - drawLength;
         if (scrollPercentage >= 0.99) {
@@ -99,7 +112,7 @@ export default function Page() {
 
   return (
     <div className="page our-story">
-      <main dangerouslySetInnerHTML={{ __html: page.body }} />
+      <main dangerouslySetInnerHTML={{__html: page.body}} />
     </div>
   );
 }

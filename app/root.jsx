@@ -134,17 +134,12 @@ export default function App() {
   const data = useLoaderData();
   const location = useLocation();
   const gaTrackingId = 'G-RMTF34SVQM';
-  const [canonicalUrl, setCanonicalUrl] = useState('');
 
   useEffect(() => {
     if (gaTrackingId?.length) {
       gtag.pageview(location.pathname, gaTrackingId);
     }
   }, [location, gaTrackingId]);
-
-  useEffect(() => {
-    setCanonicalUrl(`${window.location.origin}${location.pathname}`);
-  }, [location.pathname]);
 
   useEffect(() => {
     function setEqualHeight() {
@@ -172,7 +167,6 @@ export default function App() {
 
     setEqualHeight();
     window.addEventListener('resize', setEqualHeight);
-
     return () => {
       window.removeEventListener('resize', setEqualHeight);
     };
@@ -189,7 +183,6 @@ export default function App() {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width,initial-scale=1" />
-        {canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
         <meta name="robots" content="index, follow" />
         {!gaTrackingId ? null : (
           <>

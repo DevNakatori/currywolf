@@ -5,14 +5,21 @@ import '../styles/job-detail.css';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`},
-    {name :"description","content": data.page.seo.description }
+  return [
+    {title: `Curry Wolf | ${data?.page.title ?? ''}`},
+    {name: 'description', content: data.page.seo.description},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
   ];
 };
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({params, context}) {
+export async function loader({params, request, context}) {
+  const canonicalUrl = request.url;
   const handle = params.handle || 'junior-operation-manager';
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
@@ -24,8 +31,7 @@ export async function loader({params, context}) {
     throw new Response('Not Found', {status: 404});
   }
 
-  return json({page});
-
+  return json({page, canonicalUrl});
 }
 
 export default function Page() {

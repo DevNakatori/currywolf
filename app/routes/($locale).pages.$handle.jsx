@@ -5,15 +5,22 @@ import {useLoaderData} from '@remix-run/react';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`},
-    {name :"description","content": data.page.seo.description }
+  return [
+    {title: `Curry Wolf | ${data?.page.title ?? ''}`},
+    {name: 'description', content: data.page.seo.description},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
   ];
 };
 
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({params, context}) {
+export async function loader({params, request, context}) {
+  const canonicalUrl = request.url;
   if (!params.handle) {
     throw new Error('Missing page handle');
   }
@@ -28,7 +35,7 @@ export async function loader({params, context}) {
     throw new Response('Not Found', {status: 404});
   }
 
-  return json({page, handle: params.handle});
+  return json({page, canonicalUrl, handle: params.handle});
 }
 
 export default function Page() {

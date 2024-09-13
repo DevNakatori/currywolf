@@ -1,21 +1,28 @@
 import {json} from '@shopify/remix-oxygen';
 import {useLoaderData} from '@remix-run/react';
 import '../styles/location-inner.css';
-import { useEffect, useRef, useState } from 'react';
+import {useEffect, useRef, useState} from 'react';
 /**
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`},
-    {name :"description","content": data.page.seo.description }
+  return [
+    {title: `Curry Wolf | ${data?.page.title ?? ''}`},
+    {name: 'description', content: data.page.seo.description},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
   ];
 };
 
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({params, context}) {
+export async function loader({params, request, context}) {
   const handle = params.handle || 'steglitz';
+  const canonicalUrl = request.url;
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
       handle: handle,
@@ -26,8 +33,7 @@ export async function loader({params, context}) {
     throw new Response('Not Found', {status: 404});
   }
 
-  return json({page});
-
+  return json({page, canonicalUrl});
 }
 
 export default function Page() {

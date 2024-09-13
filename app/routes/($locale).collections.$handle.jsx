@@ -17,7 +17,15 @@ import {useEffect} from 'react';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.collection.title ?? ''} Collection`}];
+  return [
+    {title: `Curry Wolf | ${data?.collection.seo.title ?? ''}`},
+    {name: 'description', content: `${data?.collection.seo.description ?? ''}`},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
+  ];
 };
 
 /**
@@ -50,8 +58,9 @@ export async function loader({request, params, context}) {
       customMenuHandle: 'collection-menu',
     },
   });
-
+  const canonicalUrl = request.url;
   return json({
+    canonicalUrl,
     collection,
     customMenu: await customMenuPromise,
   });
@@ -481,6 +490,10 @@ const COLLECTION_QUERY = `#graphql
       handle
       title
       description
+       seo {
+          description
+          title
+          }
       image {
         altText
         url

@@ -5,15 +5,22 @@ import '../styles/policies.css';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`},
-    {name :"description","content": data.page.seo.description }
+  return [
+    {title: `Curry Wolf | ${data?.page.title ?? ''}`},
+    {name: 'description', content: data.page.seo.description},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data.canonicalUrl,
+    },
   ];
 };
 
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({params, context}) {
+export async function loader({params, request, context}) {
+  const canonicalUrl = request.url;
   const handle = params.handle || 'legal-notice';
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
@@ -25,8 +32,7 @@ export async function loader({params, context}) {
     throw new Response('Not Found', {status: 404});
   }
 
-  return json({page});
-
+  return json({page, canonicalUrl});
 }
 
 export default function Page() {
@@ -37,12 +43,14 @@ export default function Page() {
     <div className="policy">
       <div className="container">
         <div>
-          <Link className="yellow-border-btn" to="/policies">← Zu allen Richtlinien</Link>
+          <Link className="yellow-border-btn" to="/policies">
+            ← Zu allen Richtlinien
+          </Link>
         </div>
         <div className="top-title">
           <h1>{page.title}</h1>
         </div>
-        <div dangerouslySetInnerHTML={{ __html: page.body }} />
+        <div dangerouslySetInnerHTML={{__html: page.body}} />
       </div>
     </div>
   );

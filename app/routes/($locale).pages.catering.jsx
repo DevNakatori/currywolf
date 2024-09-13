@@ -7,15 +7,22 @@ import '../styles/catering-page.css';
  * @type {MetaFunction<typeof loader>}
  */
 export const meta = ({data}) => {
-  return [{title: `Curry Wolf | ${data?.page.title ?? ''}`},
-    {name :"description","content": data.page.seo.description }
+  return [
+    {title: `Curry Wolf | ${data?.page?.title ?? ''}`},
+    {name: 'description', content: data?.page?.seo?.description || ''},
+    {
+      tagName: 'link',
+      rel: 'canonical',
+      href: data?.canonicalUrl || '',
+    },
   ];
 };
 
 /**
  * @param {LoaderFunctionArgs}
  */
-export async function loader({params, context}) {
+export async function loader({params, request, context}) {
+  const canonicalUrl = request.url;
   const handle = params.handle || 'catering';
   const {page} = await context.storefront.query(PAGE_QUERY, {
     variables: {
@@ -27,7 +34,7 @@ export async function loader({params, context}) {
     throw new Response('Not Found', {status: 404});
   }
 
-  return json({page});
+  return json({page, canonicalUrl});
 }
 
 export default function Page() {
@@ -35,57 +42,38 @@ export default function Page() {
   const {page} = useLoaderData();
 
   useEffect(() => {
-    if (window.innerWidth < 768) {
-      setTimeout(function () {
-        const sliderContainer = document.querySelector('.ref-wrap');
-        const slides = document.querySelectorAll('.ref-box');
-        let currentIndex = 0;
-        let slidesToShow = 1;
+    function setEqualHeight() {
+      const boxes = document.querySelectorAll('.same-height');
+      if (boxes.length === 0) {
+        return;
+      }
 
-        function updateSlider() {
-          if (window.innerWidth < 768) {
-            slidesToShow = 2;
-          } else {
-            slidesToShow = 1;
-          }
+      let maxHeight = 0;
 
-          const width = sliderContainer.clientWidth / slidesToShow;
-          slides.forEach((slide) => {
-            slide.style.minWidth = `${width}px`;
-          });
-          sliderContainer.style.transform = `translateX(${
-            -width * currentIndex
-          }px)`;
+      boxes.forEach((box) => {
+        box.style.minHeight = '100px';
+        box.style.height = 'auto';
+      });
+
+      boxes.forEach((box) => {
+        const boxHeight = box.clientHeight;
+        if (boxHeight > maxHeight) {
+          maxHeight = boxHeight;
         }
+      });
 
-        function nextSlide() {
-          if (currentIndex < slides.length - slidesToShow) {
-            currentIndex += 1;
-          } else {
-            currentIndex = 0;
-          }
-          updateSlider();
-        }
-
-        function startAutoplay() {
-          setInterval(nextSlide, 3000);
-        }
-
-        function resetAutoplay() {
-          clearInterval(autoplayInterval);
-          startAutoplay();
-        }
-
-        window.addEventListener('resize', function () {
-          updateSlider();
-          currentIndex = 0;
-        });
-
-        updateSlider();
-        startAutoplay();
-      }, 2000);
+      boxes.forEach((box) => {
+        box.style.height = `${maxHeight}px`;
+      });
     }
-  }, []);
+
+    setEqualHeight();
+    window.addEventListener('resize', setEqualHeight);
+
+    return () => {
+      window.removeEventListener('resize', setEqualHeight);
+    };
+  }, [location]);
 
   return (
     <div className="page catering-main">
