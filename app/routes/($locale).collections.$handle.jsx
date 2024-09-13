@@ -18,7 +18,7 @@ import {useEffect} from 'react';
  */
 export const meta = ({data}) => {
   return [
-    {title: `Curry Wolf | ${data?.collection.seo.title ?? ''}`},
+    {title: `Curry Wolf | ${data?.collection.title ?? ''}`},
     {name: 'description', content: `${data?.collection.seo.description ?? ''}`},
     {
       tagName: 'link',
