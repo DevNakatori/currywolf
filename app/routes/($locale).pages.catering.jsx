@@ -1,5 +1,5 @@
 import {json} from '@shopify/remix-oxygen';
-import {useLoaderData} from '@remix-run/react';
+import {useLoaderData, useLocation} from '@remix-run/react';
 import {useEffect} from 'react';
 import '../styles/catering-page.css';
 
@@ -40,6 +40,7 @@ export async function loader({params, request, context}) {
 export default function Page() {
   /** @type {LoaderReturnData} */
   const {page} = useLoaderData();
+  const location = useLocation();
 
   useEffect(() => {
     function setEqualHeight() {
