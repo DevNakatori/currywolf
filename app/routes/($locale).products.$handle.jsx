@@ -543,7 +543,6 @@ function ProductForm({product, selectedVariant, variants}) {
   const handleQuantityChange = (newQuantity) => {
     setQuantity(newQuantity);
   };
-
   return (
     <div className="product-form-main">
       <div className="product-form">
@@ -563,6 +562,8 @@ function ProductForm({product, selectedVariant, variants}) {
         <AddToCartButton
           disabled={!selectedVariant || !selectedVariant.availableForSale}
           onClick={() => {
+            console.log("hello")
+            fbq('track', 'AddToCart', { currency: selectedVariant?.price.currencyCode , value: selectedVariant?.price.amount, content_type: 'product', content_id: selectedVariant?.id });
             publish('cart_viewed', {
               cart,
               prevCart,
@@ -646,6 +647,7 @@ function AddToCartButton({analytics, children, disabled, lines, onClick}) {
                 timeoutId = setTimeout(() => {
                   window.location.href = window.location.href + '#cart-aside';
                 }, 500);
+
               }}
               disabled={disabled ?? fetcher.state !== 'idle'}
             >
