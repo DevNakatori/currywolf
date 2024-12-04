@@ -80,14 +80,6 @@ export default function Page() {
             additionalLabel2: 'Mehr Info',
           },
           {
-            x: 22,
-            y: 30,
-            label:
-              '<img src="https://cdn.shopify.com/oxygen-v2/32730/22017/45614/725053/assets/CurryWolf_Logo_footer-BNigDRwe.svg" />',
-            additionalLabel: 'Potsdam',
-            additionalLabel2: 'Mehr Info',
-          },
-          {
             x: 33.5,
             y: 13,
             label:
@@ -119,14 +111,6 @@ export default function Page() {
             label:
               '<img src="https://cdn.shopify.com/oxygen-v2/32730/22017/45614/725053/assets/CurryWolf_Logo_footer-BNigDRwe.svg" />',
             additionalLabel: 'Steglitz',
-            additionalLabel2: 'Mehr Info',
-          },
-          {
-            x: 9,
-            y: 35,
-            label:
-              '<img src="https://cdn.shopify.com/oxygen-v2/32730/22017/45614/725053/assets/CurryWolf_Logo_footer-BNigDRwe.svg" />',
-            additionalLabel: 'Potsdam',
             additionalLabel2: 'Mehr Info',
           },
           {
