@@ -9,6 +9,7 @@ import LanguageSwitcher from './LanguageSwitcher';
  * @param {HeaderProps}
  */
 export function Header({header, isLoggedIn, cart, toggle, setToggle}) {
+  console.log(header)
   const [path, setPath] = useState('');
   const location = useLocation();
   useEffect(() => {
